@@ -1,0 +1,112 @@
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css"/>
+
+
+<style type="text/css">
+    #mynetwork {
+        width: 600px;
+        height: 400px;
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+// create an array with nodes
+
+//var data = new vis.DataSet();
+
+var temp = {
+    "employees":[
+    {"firstName":"John", "lastName":"Doe", "employer": [ {"firstName":"Anna", "lastName":"Smith", "employer":[{"firstName":"testa", "lastName":"Smith"}]},
+    {"firstName":"Peter", "lastName":"Jones"}]} ]
+}
+console.log(temp);
+console.log('works');
+var nodes = new vis.DataSet([]);
+var edges = new vis.DataSet([]);
+
+var counter =0;
+
+console.log(temp.employees[0].firstName);
+
+//nodes.add({id: counter, label: String(temp.employees[0].firstName)});
+
+headdealer(temp);
+
+function headdealer(arrayc)
+{
+    for(let i=0 ; i< arrayc.employees.length;i++)
+    {
+    counter++;
+    nodes.add({id: counter, label:String(temp.employees[i].firstName) });
+    
+    if(arrayc.employees[i].employer !== undefined)
+        {
+            
+            bodydealer(arrayc.employees[i].employer,counter)
+        }
+    }
+   
+}
+
+function bodydealer(bodypart,parentcounter)
+{
+    console.log(bodypart);
+
+    for(let i=0 ; i< bodypart.length;i++)
+    {
+        console.log('reach ehre')
+        console.log(bodypart[i].firstName)
+        console.log(parentcounter)
+    counter++;
+    nodes.add({id: counter, label: String(bodypart[i].firstName)});
+    edges.add({from: counter, to: parentcounter ,arrows : "to"})
+        if(bodypart[i].employer != undefined)
+        {
+            bodydealer(bodypart[i].employer,counter)
+        }
+    }
+    
+}
+
+
+// create an array with edges
+
+
+// create a network
+var container = document.getElementById('mynetwork');
+
+//provide the data in the vis format
+var data = {
+    nodes: nodes,
+    edges: edges
+};
+var options = {edges: {
+      font: {
+        size: 12
+      }
+    },
+    nodes: {
+      shape: 'box',
+      font: {
+        bold: {
+          color: '#0077aa'
+        }
+      }}
+    };
+
+// initialize your network!
+var network = new vis.Network(container, data, options);
+
+
+
+</script>
+</body>
+</html>
