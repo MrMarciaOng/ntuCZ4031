@@ -22,19 +22,67 @@
 
 //var data = new vis.DataSet();
 
-var temp = {
-    "employees":[
-    {"firstName":"John", "lastName":"Doe", "employer": [ {"firstName":"Anna", "lastName":"Smith", "employer":[{"firstName":"testa", "lastName":"Smith"}]},
-    {"firstName":"Peter", "lastName":"Jones"}]} ]
-}
-console.log(temp);
-console.log('works');
+// var temp = {
+//     "employees":[
+//     {"firstName":"John", "lastName":"Doe", "employer": [ {"firstName":"Anna", "lastName":"Smith", "employer":[{"firstName":"testa", "lastName":"Smith"}]},
+//     {"firstName":"Peter", "lastName":"Jones"}]} ]
+// }
+
+
+
+var temp= {
+                    "Plan" : { "Inner Unique": true,"Startup Cost": 1.54,  
+                            "Plans": [{
+                            "Startup Cost": 0,
+                            "Node Type": "Seq Scan",
+                            "Plan Rows": 149999,
+                            "Relation Name": "customer",
+                            "Alias": "customer",
+                            "Parallel Aware": false,
+                            "Parent Relationship": "Outer",
+                            "Plan Width": 162,
+                            "Total Cost": 5194.99
+                            },
+                            {
+                            "Startup Cost": 1.24,
+                            "Plans": [
+                                {
+                                "Startup Cost": 0,
+                                "Node Type": "Seq Scan",
+                                "Plan Rows": 24,
+                                "Relation Name": "nation",
+                                "Alias": "nation",
+                                "Parallel Aware": false,
+                                "Parent Relationship": "Outer",
+                                "Plan Width": 438,
+                                "Total Cost": 1.24
+                                }
+                            ],
+                            "Node Type": "Hash",
+                            "Plan Rows": 24,
+                            "Parallel Aware": false,
+                            "Parent Relationship": "Inner",
+                            "Plan Width": 438,
+                            "Total Cost": 1.24
+                            }
+                        ],
+                            "Node Type": "Hash Join",
+                            "Plan Rows": 143999,
+                            "Join Type": "Inner",
+                            "Parallel Aware": false,
+                            "Hash Cond": "(customer.c_nationkey = nation.n_nationkey)",
+                            "Plan Width": 600,
+                            "Total Cost": 5657.03
+                }
+            
+    }
+
+
 var nodes = new vis.DataSet([]);
 var edges = new vis.DataSet([]);
 
 var counter =0;
 
-console.log(temp.employees[0].firstName);
 
 //nodes.add({id: counter, label: String(temp.employees[0].firstName)});
 
@@ -42,35 +90,30 @@ headdealer(temp);
 
 function headdealer(arrayc)
 {
-    for(let i=0 ; i< arrayc.employees.length;i++)
-    {
+
     counter++;
-    nodes.add({id: counter, label:String(temp.employees[i].firstName) });
-    
-    if(arrayc.employees[i].employer !== undefined)
+    nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
+    if(arrayc["Plan"].Plans !== undefined)
         {
-            
-            bodydealer(arrayc.employees[i].employer,counter)
+            bodydealer(arrayc["Plan"]["Plans"],counter) // pass to recursive function
         }
-    }
+    
    
 }
 
-function bodydealer(bodypart,parentcounter)
+function bodydealer(bodypart,parentcounter) // deal with everything that has plans recursively
 {
-    console.log(bodypart);
+    console.log(bodypart.length);
 
     for(let i=0 ; i< bodypart.length;i++)
     {
-        console.log('reach ehre')
-        console.log(bodypart[i].firstName)
-        console.log(parentcounter)
+
     counter++;
-    nodes.add({id: counter, label: String(bodypart[i].firstName)});
+    nodes.add({id: counter, label: String("Node Type: "+bodypart[i]["Node Type"]+'\n'+ "Plan Rows: "+bodypart[i]['Total Cost']+'\n'+ "Plan Rows: "+bodypart[i]['Plan Rows'])});
     edges.add({from: counter, to: parentcounter ,arrows : "to"})
-        if(bodypart[i].employer != undefined)
+        if(bodypart[i].Plans != undefined)
         {
-            bodydealer(bodypart[i].employer,counter)
+            bodydealer(bodypart[i].Plans,counter)
         }
     }
     
@@ -98,8 +141,19 @@ var options = {edges: {
       font: {
         bold: {
           color: '#0077aa'
+        
         }
-      }}
+      }},
+      layout: {
+            hierarchical: {
+                direction: "DU",
+                sortMethod: "directed",
+                levelSeparation: 145,
+                nodeSpacing: 300,
+                treeSpacing: 500,
+            }
+ 
+  }
     };
 
 // initialize your network!
