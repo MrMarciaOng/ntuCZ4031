@@ -81,7 +81,7 @@ var temp= {
 var nodes = new vis.DataSet([]);
 var edges = new vis.DataSet([]);
 
-var counter =0;
+var counter = 0;
 
 
 //nodes.add({id: counter, label: String(temp.employees[0].firstName)});
@@ -92,7 +92,17 @@ function headdealer(arrayc)
 {
 
     counter++;
-    nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
+    var nodesLabel = "";
+    Object.keys(arrayc["Plan"]).forEach(function(key) {
+        if(key != "Plans"){
+            var tempString = key + ": " + String(arrayc["Plan"][key]) + '\n';
+            nodesLabel = nodesLabel.concat(tempString);
+        }
+
+    });
+    console.log(nodesLabel);
+    nodes.add({id: counter,color : {border : 'red'}, label: nodesLabel})
+    // nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
     if(arrayc["Plan"].Plans !== undefined)
         {
             bodydealer(arrayc["Plan"]["Plans"],counter) // pass to recursive function
@@ -109,7 +119,16 @@ function bodydealer(bodypart,parentcounter) // deal with everything that has pla
     {
 
     counter++;
-    nodes.add({id: counter, label: String("Node Type: "+bodypart[i]["Node Type"]+'\n'+ "Plan Rows: "+bodypart[i]['Total Cost']+'\n'+ "Plan Rows: "+bodypart[i]['Plan Rows'])});
+    var nodesLabel = "";
+    Object.keys(bodypart[i]).forEach(function(key) {
+        if(key != "Plans"){
+            var tempString = key + ": " + String(bodypart[i][key]) + '\n';
+            nodesLabel = nodesLabel.concat(tempString);
+        }
+
+    });
+    nodes.add({id: counter, label: nodesLabel});
+    // nodes.add({id: counter, label: String("Node Type: "+bodypart[i]["Node Type"]+'\n'+ "Plan Rows: "+bodypart[i]['Total Cost']+'\n'+ "Plan Rows: "+bodypart[i]['Plan Rows'])});
     edges.add({from: counter, to: parentcounter ,arrows : "to"})
         if(bodypart[i].Plans != undefined)
         {
