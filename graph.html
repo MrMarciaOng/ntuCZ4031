@@ -101,7 +101,8 @@ function headdealer(arrayc)
 
     });
     console.log(nodesLabel);
-    nodes.add({id: counter,color : {border : 'red'}, label: nodesLabel})
+    nodecreator(nodesLabel,counter,arrayc["Plan"]["Node Type"]);
+    //nodes.add({id: counter,color : {border : 'red'}, label: nodesLabel})
     // nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
     if(arrayc["Plan"].Plans !== undefined)
         {
@@ -111,6 +112,89 @@ function headdealer(arrayc)
    
 }
 
+
+function nodecreator(nodesLabel,counter,nodetype)
+{
+    if (nodetype == "Hash Join")
+    {
+        nodes.add({id: counter,color : "#e0dab3", label: nodesLabel, shape : "circle"})
+    }
+    else if (nodetype == "Hash")
+    {
+        nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "circle"})
+    }
+    else if (nodetype == "Nested Loop")
+    {
+        nodes.add({id: counter,color : "#ad6e4a", label: nodesLabel, shape : "circle"})
+    }
+    else if (nodetype == "Merge Join")
+    {
+        nodes.add({id: counter,color : "#4aad69", label: nodesLabel, shape : "circle"})
+    }
+
+    else if (nodetype == "Seq Scan")
+    {
+        nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "box"})
+    }
+    else if (nodetype == "Index Scan")
+    {
+        nodes.add({id: counter,color : "#ad6e4a", label: nodesLabel, shape : "box"})
+    }
+    else if (nodetype == "Values Scan")
+    {
+        nodes.add({id: counter,color : "#4aad69", label: nodesLabel, shape : "box"})
+    }
+
+    else if (nodetype == "Index Only Scan")
+    {
+        nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "box"})
+    }
+    else if (nodetype == "Subquery Scan")
+    {
+        nodes.add({id: counter,color : "#8aad4a", label: nodesLabel, shape : "box"})
+    }
+    else if (nodetype == "Function Scan")
+    {
+        nodes.add({id: counter,color : "#a37d7d", label: nodesLabel, shape : "box"})
+    }
+
+     else if (nodetype == "Sort")
+    {
+        nodes.add({id: counter,color : "#8aad4a", label: nodesLabel, shape : "diamond"})
+    }
+    else if (nodetype == "Aggregate")
+    {
+        nodes.add({id: counter,color : "#a37d7d", label: nodesLabel, shape : "diamond"})
+    }
+
+
+    else
+    {
+        nodes.add({id: counter,color : "#4aad69", label: nodesLabel})
+    }
+    /*
+   
+    
+ 
+    
+
+
+  
+    
+    'Materialize'
+    'Limit'
+    'Result' 
+    'Gather'
+    'Gather Merge'
+    
+    'BitmapAnd'
+    'BitmapOr'
+    'Bitmap Heap Scan'
+    'Bitmap Index Scan'
+    'CTE Scan'
+    'Append'
+    'Unique'*/
+}
 function bodydealer(bodypart,parentcounter) // deal with everything that has plans recursively
 {
     console.log(bodypart.length);
@@ -127,7 +211,8 @@ function bodydealer(bodypart,parentcounter) // deal with everything that has pla
         }
 
     });
-    nodes.add({id: counter, label: nodesLabel});
+    //nodes.add({id: counter, label: nodesLabel});
+    nodecreator(nodesLabel,counter,bodypart[i]["Node Type"]);
     // nodes.add({id: counter, label: String("Node Type: "+bodypart[i]["Node Type"]+'\n'+ "Plan Rows: "+bodypart[i]['Total Cost']+'\n'+ "Plan Rows: "+bodypart[i]['Plan Rows'])});
     edges.add({from: counter, to: parentcounter ,arrows : "to"})
         if(bodypart[i].Plans != undefined)
@@ -167,9 +252,9 @@ var options = {edges: {
             hierarchical: {
                 direction: "DU",
                 sortMethod: "directed",
-                levelSeparation: 145,
-                nodeSpacing: 300,
-                treeSpacing: 500,
+                levelSeparation: 256,
+                nodeSpacing: 720,
+                treeSpacing: 1000,
             }
  
   }
