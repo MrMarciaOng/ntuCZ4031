@@ -10,14 +10,87 @@
 		
 		<script>
 			function formatData(type) {
-				const db_name = document.getElementById("db_name").value || "CZ4031";
-				const user = document.getElementById("user").value || "postgres";
-				const password = document.getElementById("password").value || "admin";
-				const host = document.getElementById("host").value || "localhost";
-				const port = document.getElementById("port").value || "5432";
-				const query = document.getElementById("query").value;
-				const payload = {type, data: {db_name, user, password, host, port, query}};
+				const plan = document.getElementById("plan").value;
+				const payload = {type, data: {plan}};
 				handleSubmit(payload);
+			}
+			function giveSample(){
+				var sample = [
+						{
+							"Plan": {
+							"Node Type": "Hash Join",
+							"Parallel Aware": false,
+							"Join Type": "Inner",
+							"Startup Cost": 1.54,
+							"Total Cost": 5657.03,
+							"Plan Rows": 143999,
+							"Plan Width": 600,
+							"Actual Startup Time": 0.27,
+							"Actual Total Time": 369.85,
+							"Actual Rows": 144074,
+							"Actual Loops": 1,
+							"Inner Unique": true,
+							"Hash Cond": "(c.c_nationkey = n.n_nationkey)",
+							"Plans": [
+								{
+								"Node Type": "Seq Scan",
+								"Parent Relationship": "Outer",
+								"Parallel Aware": false,
+								"Relation Name": "customer",
+								"Alias": "c",
+								"Startup Cost": 0,
+								"Total Cost": 5194.99,
+								"Plan Rows": 149999,
+								"Plan Width": 162,
+								"Actual Startup Time": 0.043,
+								"Actual Total Time": 110.056,
+								"Actual Rows": 149999,
+								"Actual Loops": 1
+								},
+								{
+								"Node Type": "Hash",
+								"Parent Relationship": "Inner",
+								"Parallel Aware": false,
+								"Startup Cost": 1.24,
+								"Total Cost": 1.24,
+								"Plan Rows": 24,
+								"Plan Width": 438,
+								"Actual Startup Time": 0.091,
+								"Actual Total Time": 0.091,
+								"Actual Rows": 24,
+								"Actual Loops": 1,
+								"Hash Buckets": 1024,
+								"Original Hash Buckets": 1024,
+								"Hash Batches": 1,
+								"Original Hash Batches": 1,
+								"Peak Memory Usage": 12,
+								"Plans": [
+									{
+									"Node Type": "Seq Scan",
+									"Parent Relationship": "Outer",
+									"Parallel Aware": false,
+									"Relation Name": "nation",
+									"Alias": "n",
+									"Startup Cost": 0,
+									"Total Cost": 1.24,
+									"Plan Rows": 24,
+									"Plan Width": 438,
+									"Actual Startup Time": 0.025,
+									"Actual Total Time": 0.036,
+									"Actual Rows": 24,
+									"Actual Loops": 1
+									}
+								]
+								}
+							]
+							},
+							"Planning Time": 5.073,
+							"Triggers": [],
+							"Execution Time": 384.985
+						}
+						];
+				sample = JSON.stringify(sample);
+				document.getElementById("plan").value = sample;
 			}
 		</script>
 		<style type="text/css">
@@ -51,7 +124,8 @@
 			<div>
 				<textarea placeholder="Paste your QEP here" id="plan" rows="30" cols="100"></textarea>
 			</div>
-			<button type="button" class="btn btn-dark mainInput" onclick="formatData(1)">Visualize</button>
+			<button type="button" class="btn btn-dark mainInput" onclick="giveSample()">Sample</button>
+			<button type="button" class="btn btn-dark mainInput" onclick="formatData(2)">Visualize</button>
 			<h3>Graph</h3>
 			<div id="result"></div>
             <div id="graph"></div>

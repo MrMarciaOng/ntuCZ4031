@@ -24,7 +24,7 @@ function handleSubmit(e) {
 }
 
 function createGraph(data){
-    var data = JSON.parse(data);
+    console.log(data);
     var graph = new Graph();
     graph.headdealer(data);
 }
@@ -38,8 +38,9 @@ this.counter = 0;
 
 this.headdealer = function(arrayc)
 {
-    // console.log(arrayc);
-    // console.log(arrayc["Plan"]);
+    console.log(arrayc);
+    console.log(arrayc["Plan"]);
+    arrayc = JSON.parse(arrayc);
     this.counter++;
     var nodesLabel = "";
     Object.keys(arrayc["Plan"]).forEach(function(key) {

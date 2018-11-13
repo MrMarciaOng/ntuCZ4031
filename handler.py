@@ -6,6 +6,7 @@ from query_handler import connect, query_handler
     Message type:
     0: Check Connection
     1: Explain Query Execution Plan; Input: Query
+    2: Input: Plan
 """
 
 def handler(payload):
@@ -22,6 +23,9 @@ def handler(payload):
     elif action_type == 1:
         result = query_handler(data)
         return result 
+    
+    elif action_type == 2:
+        return data["plan"]
 
     else:
         print("Type not valid")

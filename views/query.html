@@ -15,14 +15,18 @@
 		
 		<script>
 			function formatData(type) {
-				const db_name ="CZ4031";
+				const db_name ="postgres";
 				const user = "postgres";
-				const password = "Jeffrey98";
+				const password = "Sns27sep.";
 				const host = "localhost";
 				const port ="5432";
 				const query = document.getElementById("query").value;
 				const payload = {type, data: {db_name, user, password, host, port, query}};
 				handleSubmit(payload);
+			}
+			function giveSample(){
+				const sample = "Select * from customer c, nation n where c.c_nationkey = n.n_nationkey";
+				document.getElementById("query").value = sample;
 			}
 		</script>
 		<style type="text/css">
@@ -56,6 +60,7 @@
 			<div>
 				<textarea placeholder="Paste your query here" id="query" rows="20" cols="75"></textarea>
 			</div>
+			<button type="button" class="btn btn-dark mainInput" onclick="giveSample()">Sample</button>
 			<button type="button" class="btn btn-dark mainInput" onclick="formatData(1)">Visualize</button>
 			<h3>Graph</h3>
 			<div id="result"></div>
