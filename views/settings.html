@@ -1,7 +1,12 @@
 <html>
 	<head>
-		<title>Plan Visualizer Page</title>
-		<script src="../static/main.js"></script>
+
+
+		<script src="../static/jquery.min.js"></script>
+
+		<title>Query Visualizer Page</title>
+
+		<script src="../static/setting.js"></script>
 		<script type="text/javascript" src="../static/vis.js"></script>
 	    <link href="../static/vis-network.css" rel="stylesheet" type="text/css" />
 		<link href="https://fonts.googleapis.com/css?family=Open+sans|Roboto+Slab" rel="stylesheet">
@@ -15,8 +20,7 @@
 				const password = document.getElementById("password").value || "admin";
 				const host = document.getElementById("host").value || "localhost";
 				const port = document.getElementById("port").value || "5432";
-				const query = document.getElementById("query").value;
-				const payload = {type, data: {db_name, user, password, host, port, query}};
+				const payload = {type, data: {db_name, user, password, host, port}};
 				handleSubmit(payload);
 			}
 		</script>
@@ -30,7 +34,7 @@
 	</head>
 	<body>
 		<div>
-			<h1>CZ4031 - Project 2</h1>
+			<h1>CZ4031 - Project 2</h1></a>
 			<p>
 					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,28 +44,42 @@
 							  <div class="navbar-nav">
 								<a class="nav-item nav-link" href="/">Home </a>
 								<a class="nav-item nav-link" href="/query">Query</a>
-								<a class="nav-item nav-link  active" href="/plan">Plan <span class="sr-only">(current)</span></a>
-								<a class="nav-item nav-link" href="/credits">Credits</a>
-								<a class="nav-item nav-link" href="/settings">Settings</a>
+								<a class="nav-item nav-link" href="/plan">Plan</a>
+                                <a class="nav-item nav-link" href="/credits">Credits</a>
+                                <a class="nav-item nav-link active" href="/settings">Settings<span class="sr-only">(current)</span></a>
 							  </div>
 							</div>
 						  </nav>
 			</p>
-			<h2>Plan Visualizer</h2>
-            <h3>Plan</h3>
-			<div>
-				<textarea placeholder="Paste your QEP here" id="plan" rows="30" cols="100"></textarea>
+			<h2>Settings</h2>
+			<h3>Connect to Database</h3>
+			<table>
+				<tr>
+					<td>Database Name</td>
+					<td>User</td>
+					<td>Password</td>
+					<td>Host</td>
+					<td>Port</td>
+				</tr>
+				<tr>
+					<td><input placeholder="CZ4031" id="db_name" type="text"></input></td>
+					<td><input placeholder="postgres" id="user" type="text"></input></td>
+					<td><input placeholder="admin" id="password" type="password" </input></td>
+					<td><input placeholder="localhost" id="host" type="text"></input></td>
+					<td><input placeholder="5432" id="port" type="text"></input></td>
+				</tr>
+				<tr>
+					<td>
+						<button type="button" class="btn btn-dark mainInput" onclick="formatData(0)">Connect</button>
+					</td>
+				</tr>
+            </table>
+            <div id="result"></div>
 			</div>
-			<button type="button" class="btn btn-dark mainInput" onclick="formatData(1)">Visualize</button>
-			<h3>Graph</h3>
-			<div id="result"></div>
-            <div id="graph"></div>
-            <!-- <a href="/">
-                <button class="mainInput">
-                    Back
-                </button>
-            </a> -->
-		</div>
 			
 		
+		<!-- <button class="command" onclick="speak()">Speak</button> -->
+
+	</body>
+</html>
 

@@ -11,14 +11,15 @@
 	    <link href="../static/vis-network.css" rel="stylesheet" type="text/css" />
 		<link href="https://fonts.googleapis.com/css?family=Open+sans|Roboto+Slab" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../static/style.css">
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 		
 		<script>
 			function formatData(type) {
-				const db_name = document.getElementById("db_name").value || "CZ4031";
-				const user = document.getElementById("user").value || "postgres";
-				const password = document.getElementById("password").value || "admin";
-				const host = document.getElementById("host").value || "localhost";
-				const port = document.getElementById("port").value || "5432";
+				const db_name ="CZ4031";
+				const user = "postgres";
+				const password = "Jeffrey98";
+				const host = "localhost";
+				const port ="5432";
 				const query = document.getElementById("query").value;
 				const payload = {type, data: {db_name, user, password, host, port, query}};
 				handleSubmit(payload);
@@ -34,36 +35,29 @@
 	</head>
 	<body>
 		<div>
-			<a href="/"><h1>CZ4031 - Project 2</h1></a>
-			<h1>Query Visualizer</h1>
-			<p>Welcome to Query Visualizer</p>
-			<h3>Connect to Database</h3>
-			<table>
-				<tr>
-					<td>Database Name</td>
-					<td>User</td>
-					<td>Password</td>
-					<td>Host</td>
-					<td>Port</td>
-				</tr>
-				<tr>
-					<td><input placeholder="CZ4031" id="db_name" type="text"></input></td>
-					<td><input placeholder="postgres" id="user" type="text"></input></td>
-					<td><input placeholder="admin" id="password" type="text"></input></td>
-					<td><input placeholder="localhost" id="host" type="text"></input></td>
-					<td><input placeholder="5432" id="port" type="text"></input></td>
-				</tr>
-				<tr>
-					<td>
-						<button class="command" onclick="formatData(0)">Test Connection</button>
-					</td>
-				</tr>
-			</table>
+			<h1>CZ4031 - Project 2</h1></a>
+			<p>
+					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+							  <span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+							  <div class="navbar-nav">
+								<a class="nav-item nav-link" href="/">Home </a>
+								<a class="nav-item nav-link active" href="/query">Query<span class="sr-only">(current)</span></a>
+								<a class="nav-item nav-link" href="/plan">Plan</a>
+								<a class="nav-item nav-link" href="/credits">Credits</a>
+								<a class="nav-item nav-link" href="/settings">Settings</a>
+							  </div>
+							</div>
+						  </nav>
+			</p>
+			<h2>Query Visualizer</h2>
 			<h3>Query</h3>
 			<div>
 				<textarea placeholder="Paste your query here" id="query" rows="20" cols="75"></textarea>
 			</div>
-			<button class="command" onclick="formatData(1)">Visualize</button>
+			<button type="button" class="btn btn-dark mainInput" onclick="formatData(1)">Visualize</button>
 			<h3>Graph</h3>
 			<div id="result"></div>
 			<!-- <a href="/">Back to Home Page</a> -->
