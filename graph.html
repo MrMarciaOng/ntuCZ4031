@@ -18,6 +18,7 @@
 
 <body>
     <div id="mynetwork"></div>
+    <div id="nodetext"></div>
 
     <script type="text/javascript">
         // create an array with nodes
@@ -102,8 +103,8 @@
                 }
 
             });
-            console.log(nodesLabel);
-            nodecreator(nodesLabel, counter, arrayc["Plan"]["Node Type"]);
+           // console.log(nodesLabel);
+            nodecreator(nodesLabel, counter, arrayc["Plan"]["Node Type"],arrayc["Plan"]);
             //nodes.add({id: counter,color : {border : 'red'}, label: nodesLabel})
             // nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
             if (arrayc["Plan"].Plans !== undefined) {
@@ -114,9 +115,9 @@
         }
 
 
-        function nodecreator(nodesLabel, counter, nodetype) {
+        function nodecreator(nodesLabel, counter, nodetype,displayNode) {
             if (nodetype == "Hash Join") {
-                nodes.add({ id: counter, color: "#e0dab3", label: nodesLabel, shape: "circle" })
+                nodes.add({ id: counter, color: "#e0dab3", label: nodesLabel, shape: "circle" , title: '<pre>' + nodesLabel + '</pre>', display : displayNode })
             }
             else if (nodetype == "Hash") {
                 nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "circle" })
@@ -129,8 +130,8 @@
             }
 
             else if (nodetype == "Seq Scan") {
-                console.log(nodesLabel);
-                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "box", title: '<pre>' + nodesLabel + '</pre>' })
+               // console.log(nodesLabel);
+                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "box", title: '<pre>' + nodesLabel + '</pre>', display : displayNode })
             }
             else if (nodetype == "Index Scan") {
                 nodes.add({ id: counter, color: "#ad6e4a", label: nodesLabel, shape: "box" })
@@ -185,7 +186,7 @@
         }
         function bodydealer(bodypart, parentcounter) // deal with everything that has plans recursively
         {
-            console.log(bodypart.length);
+            //console.log(bodypart.length);
 
             for (let i = 0; i < bodypart.length; i++) {
 
@@ -259,6 +260,12 @@
         // initialize your network!
         var network = new vis.Network(container, data, options);
 
+        network.on('click', function (properties) {
+            var ids = properties.nodes;
+            var clickedNodes = nodes.get(ids);
+            document.getElementById("nodetext").innerHTML = clickedNodes[0].display;
+            console.log('clicked nodes:', clickedNodes);
+        });
 
 
     </script>
