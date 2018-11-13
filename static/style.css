@@ -3,14 +3,14 @@ html {
 }
 body {
 	font-family: "Open Sans", sans-serif;
-	color: #333;
-	background-color: #F7F7FF;
+	color: #333333;
+	background-color: #eff1f9;
 	padding: 50px;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto Slab", serif;
-	color: #545E75;
+	color: #4a6da9;
 }
 
 button {
@@ -18,19 +18,19 @@ button {
 }
 
 .mainInput {
-	padding: 30px;
-	border-radius: 15px;
-	background-color: #545E75;
-	color: #F7F7FF;
-	font-size: 2rem;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #1c9bcc;
+	color: #FFFFFF;
+	font-size: 20px;
 	margin: 20px;
 }
 
 .command {
 	padding: 10px;
 	border-radius: 5px ;
-	background-color: #545E75;
-	color: #F7F7FF;
+	background-color: #1c9bcc;
+	color: #FFFFFF;
 	margin: 5px;
 	margin-left: 0px;
 }

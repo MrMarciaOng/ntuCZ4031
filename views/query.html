@@ -1,11 +1,12 @@
 <html>
 	<head>
 		<title>Query Page</title>
+		<script src="../static/main.js"></script>
 		<script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
 	    <link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
 		<link href="https://fonts.googleapis.com/css?family=Open+sans|Roboto+Slab" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../static/main.css">
-		<script src="../static/main.js"></script>
+		<link rel="stylesheet" type="text/css" href="../static/style.css">
+		
 		<script>
 			function formatData(type) {
 				const db_name = document.getElementById("db_name").value || "CZ4031";
@@ -28,71 +29,45 @@
 	</head>
 	<body>
 		<div>
-		<h1>Query Page</h1>
-		<a href="/">Back to Main Page</a>
-		<h3>Connection</h3>
-		<table>
-			<tr>
-				<td>Database Name</td>
-				<td>User</td>
-				<td>Password</td>
-				<td>Host</td>
-				<td>Port</td>
-			</tr>
-			<tr>
-				<td><input placeholder="CZ4031" id="db_name" type="text"></input></td>
-				<td><input placeholder="postgres" id="user" type="text"></input></td>
-				<td><input placeholder="admin" id="password" type="text"></input></td>
-				<td><input placeholder="localhost" id="host" type="text"></input></td>
-				<td><input placeholder="5432" id="port" type="text"></input></td>
-			</tr>
-			<tr>
-				<td>
-					<button class="command" onclick="formatData(0)">Test Connection</button>
-				</td>
-			</tr>
-		</table>
-		<h3>Query</h3>
-		<div>
-			<textarea placeholder="Paste your query here" id="query" rows="20" cols="75"></textarea>
-		</div>
-		<button class="command" onclick="formatData(1)">Submit</button>
-		<h3>Result</h3>
-		<div id="result"></div>
-		<div id="graph"></div>
-	</div>
-		<script type="text/javascript">
-			// create an array with nodes
-			var nodes = new vis.DataSet([
-				{id: 1, label: 'Node 1'},
-				{id: 2, label: 'Node 2'},
-				{id: 3, label: 'Node 3'},
-				{id: 4, label: 'Node 4'},
-				{id: 5, label: 'Node 5'}
-			]);
-
-			// create an array with edges
-			var edges = new vis.DataSet([
-				{from: 1, to: 5},
-				{from: 1, to: 2},
-				{from: 2, to: 4},
-				{from: 2, to: 5}
-			]);
-
-			// create a network
-			var container = document.getElementById('graph');
-
-			// provide the data in the vis format
-			var data = {
-				nodes: nodes,
-				edges: edges
-			};
-			var options = {};
-
-			// initialize your network!
-			var network = new vis.Network(container, data, options);
-		</script>
+			<a href="/"><h1>CZ4031 - Project 2</h1></a>
+			<h1>Query Visualizer</h1>
+			<p>Welcome to Query Visualizer</p>
+			<h3>Connect to Database</h3>
+			<table>
+				<tr>
+					<td>Database Name</td>
+					<td>User</td>
+					<td>Password</td>
+					<td>Host</td>
+					<td>Port</td>
+				</tr>
+				<tr>
+					<td><input placeholder="CZ4031" id="db_name" type="text"></input></td>
+					<td><input placeholder="postgres" id="user" type="text"></input></td>
+					<td><input placeholder="admin" id="password" type="text"></input></td>
+					<td><input placeholder="localhost" id="host" type="text"></input></td>
+					<td><input placeholder="5432" id="port" type="text"></input></td>
+				</tr>
+				<!-- <tr>
+					<td>
+						<button class="command" onclick="formatData(0)">Test Connection</button>
+					</td>
+				</tr> -->
+			</table>
+			<h3>Query</h3>
+			<div>
+				<textarea placeholder="Paste your query here" id="query" rows="20" cols="75"></textarea>
+			</div>
+			<button class="command" onclick="formatData(1)">Visualize</button>
+			<h3>Graph</h3>
+			<div id="result"></div>
+			<!-- <a href="/">Back to Home Page</a> -->
+			<div id="graph"></div>
+			</div>
+			
+		
 		<!-- <button class="command" onclick="speak()">Speak</button> -->
+
 	</body>
 </html>
 
