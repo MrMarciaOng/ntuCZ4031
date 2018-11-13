@@ -13,6 +13,14 @@ class QueryHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("views/query.html")
 
+class PlanHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("views/plan.html")
+
+class CreditHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("views/credits.html")
+
 class EchoWebSocket(tornado.websocket.WebSocketHandler):
     def open(self):
         print("Websocket opened!")
@@ -29,6 +37,8 @@ def make_app():
     return tornado.web.Application([
             (r"/", MainHandler),
             (r"/query", QueryHandler),
+            (r"/plan", PlanHandler),
+            (r"/credits", CreditHandler),
             (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': "./static"}),
             (r"/websocket", EchoWebSocket),
         ])
