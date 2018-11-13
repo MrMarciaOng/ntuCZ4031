@@ -274,7 +274,7 @@
         network.on('click', function (properties) {
             var ids = properties.nodes;
             var clickedNodes = nodes.get(ids);
-            document.getElementById("nodetext").innerHTML = clickedNodes[0].display;
+            document.getElementById("nodetext").innerHTML = clickedNodes[0].display["Total Cost"];
             console.log('clicked nodes:', clickedNodes);
         });
 
