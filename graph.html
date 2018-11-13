@@ -104,6 +104,7 @@
 
             });
            // console.log(nodesLabel);
+
             nodecreator(nodesLabel, counter, arrayc["Plan"]["Node Type"],arrayc["Plan"]);
             //nodes.add({id: counter,color : {border : 'red'}, label: nodesLabel})
             // nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
@@ -116,8 +117,18 @@
 
 
         function nodecreator(nodesLabel, counter, nodetype,displayNode) {
+            displayNode = displayNode || null;
+            if(displayNode!=null){
+                var newObj = JSON.parse(JSON.stringify(displayNode));
+                console.log("wtf")
+                if(newObj.Plans != null){
+                delete newObj.Plans;
+            }
+            }
+
+
             if (nodetype == "Hash Join") {
-                nodes.add({ id: counter, color: "#e0dab3", label: nodesLabel, shape: "circle" , title: '<pre>' + nodesLabel + '</pre>', display : displayNode })
+                nodes.add({ id: counter, color: "#e0dab3", label: nodesLabel, shape: "circle" , title: '<pre>' + nodesLabel + '</pre>', display : newObj })
             }
             else if (nodetype == "Hash") {
                 nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "circle" })
@@ -131,7 +142,7 @@
 
             else if (nodetype == "Seq Scan") {
                // console.log(nodesLabel);
-                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "box", title: '<pre>' + nodesLabel + '</pre>', display : displayNode })
+                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "box", title: '<pre>' + nodesLabel + '</pre>', display : newObj })
             }
             else if (nodetype == "Index Scan") {
                 nodes.add({ id: counter, color: "#ad6e4a", label: nodesLabel, shape: "box" })
