@@ -15,7 +15,7 @@
 				handleSubmit(payload);
 			}
 			function giveSample(){
-				var sample = [
+				var sample = 
 						{
 							"Plan": {
 							"Node Type": "Hash Join",
@@ -88,7 +88,7 @@
 							"Triggers": [],
 							"Execution Time": 384.985
 						}
-						];
+						;
 				sample = JSON.stringify(sample);
 				document.getElementById("plan").value = sample;
 			}
