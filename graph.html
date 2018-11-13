@@ -96,7 +96,7 @@ function headdealer(arrayc)
     Object.keys(arrayc["Plan"]).forEach(function(key) {
         if(key != "Plans"){
             var tempString = key + ": " + String(arrayc["Plan"][key]) + '\n';
-            nodesLabel = nodesLabel.concat(tempString);
+            nodesLabel = nodesLabel.concat('<b>'+tempString+'</b>');
         }
 
     });
@@ -117,7 +117,7 @@ function nodecreator(nodesLabel,counter,nodetype)
 {
     if (nodetype == "Hash Join")
     {
-        nodes.add({id: counter,color : "#e0dab3", label: nodesLabel, shape : "circle"})
+        nodes.add({id: counter,color : "#e0dab3", label: nodesLabel, shape : "circle", title :nodesLabel })
     }
     else if (nodetype == "Hash")
     {
@@ -134,7 +134,7 @@ function nodecreator(nodesLabel,counter,nodetype)
 
     else if (nodetype == "Seq Scan")
     {
-        nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "box"})
+        nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "box",title :nodesLabel})
     }
     else if (nodetype == "Index Scan")
     {
@@ -207,7 +207,7 @@ function bodydealer(bodypart,parentcounter) // deal with everything that has pla
     Object.keys(bodypart[i]).forEach(function(key) {
         if(key != "Plans"){
             var tempString = key + ": " + String(bodypart[i][key]) + '\n';
-            nodesLabel = nodesLabel.concat(tempString);
+            nodesLabel = nodesLabel.concat('<b>'+tempString+'</b>');
         }
 
     });
