@@ -7,6 +7,7 @@ from query_handler import connect, query_handler
     0: Check Connection
     1: Explain Query Execution Plan; Input: Query
 """
+
 def handler(payload):
     action_type = payload["type"]
     data = payload["data"]

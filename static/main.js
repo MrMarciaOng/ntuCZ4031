@@ -44,8 +44,18 @@ this.headdealer = function(arrayc)
     var nodesLabel = "";
     Object.keys(arrayc["Plan"]).forEach(function(key) {
         if(key != "Plans"){
-            var tempString = key + ": " + String(arrayc["Plan"][key]) + '\n';
-            nodesLabel = nodesLabel.concat(tempString);
+            var tempString = key + ": " + String(arrayc["Plan"][key]);
+            if(key == "Total Cost")
+            {
+                nodesLabel = nodesLabel.concat("<b>"+tempString+"</b>" + '\n');
+
+            }
+            else
+            {
+                nodesLabel = nodesLabel.concat(tempString + '\n');
+
+            }
+
         }
 
     });
@@ -70,60 +80,60 @@ this.nodecreator = function(nodesLabel,counter,nodetype)
 {
     if (nodetype == "Hash Join")
     {
-        this.nodes.add({id: counter,color : "#e0dab3", label: nodesLabel, shape : "circle"})
+        this.nodes.add({id: counter,color : "#e0dab3",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, shape : "circle"})
     }
     else if (nodetype == "Hash")
     {
-        this.nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "circle"})
+        this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, shape : "circle"})
     }
     else if (nodetype == "Nested Loop")
     {
-        this.nodes.add({id: counter,color : "#ad6e4a", label: nodesLabel, shape : "circle"})
+        this.nodes.add({id: counter,color : "#ad6e4a", font: { multi: 'html', face: 'georgia' },label: nodesLabel, shape : "circle"})
     }
     else if (nodetype == "Merge Join")
     {
-        this.nodes.add({id: counter,color : "#4aad69", label: nodesLabel, shape : "circle"})
+        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', face: 'georgia' },label: nodesLabel, shape : "circle"})
     }
 
     else if (nodetype == "Seq Scan")
     {
-        this.nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "box"})
+        this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', face: 'georgia' },label: nodesLabel, shape : "box"})
     }
     else if (nodetype == "Index Scan")
     {
-        this.nodes.add({id: counter,color : "#ad6e4a", label: nodesLabel, shape : "box"})
+        this.nodes.add({id: counter,color : "#ad6e4a",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, shape : "box"})
     }
     else if (nodetype == "Values Scan")
     {
-        this.nodes.add({id: counter,color : "#4aad69", label: nodesLabel, shape : "box"})
+        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', face: 'georgia' },label: nodesLabel, shape : "box"})
     }
 
     else if (nodetype == "Index Only Scan")
     {
-        this.nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "box"})
+        this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, shape : "box"})
     }
     else if (nodetype == "Subquery Scan")
     {
-        this.nodes.add({id: counter,color : "#8aad4a", label: nodesLabel, shape : "box"})
+        this.nodes.add({id: counter,color : "#8aad4a", font: { multi: 'html', face: 'georgia' },label: nodesLabel, shape : "box"})
     }
     else if (nodetype == "Function Scan")
     {
-        this.nodes.add({id: counter,color : "#a37d7d", label: nodesLabel, shape : "box"})
+        this.nodes.add({id: counter,color : "#a37d7d", font: { multi: 'html', face: 'georgia' },label: nodesLabel, shape : "box"})
     }
 
      else if (nodetype == "Sort")
     {
-        this. nodes.add({id: counter,color : "#8aad4a", label: nodesLabel, shape : "diamond"})
+        this. nodes.add({id: counter,color : "#8aad4a", font: { multi: 'html', face: 'georgia' },label: nodesLabel, shape : "diamond"})
     }
     else if (nodetype == "Aggregate")
     {
-        this.nodes.add({id: counter,color : "#a37d7d", label: nodesLabel, shape : "diamond"})
+        this.nodes.add({id: counter,color : "#a37d7d",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, shape : "diamond"})
     }
 
 
     else
     {
-        this.nodes.add({id: counter,color : "#4aad69", label: nodesLabel})
+        this.nodes.add({id: counter,color : "#4aad69",font: { multi: 'html', face: 'georgia' }, label: nodesLabel})
     }
     /*
     'Materialize'
@@ -152,8 +162,18 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
     var nodesLabel = "";
     Object.keys(bodypart[i]).forEach(function(key) {
         if(key != "Plans"){
-            var tempString = key + ": " + String(bodypart[i][key]) + '\n';
-            nodesLabel = nodesLabel.concat(tempString);
+            var tempString = key + ": " + String(bodypart[i][key]);
+            if(key == "Total Cost")
+            {
+                nodesLabel = nodesLabel.concat("<b>"+tempString+"</b>" + '\n');
+
+            }
+            else
+            {
+                nodesLabel = nodesLabel.concat(tempString + '\n');
+
+            }
+
         }
 
     });
