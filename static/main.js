@@ -429,11 +429,11 @@ function Graph() {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
                     //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
                 }
-                else if(key == "Output")
-                {
-                    nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
-                }
+                // else if(key == "Output")
+                // {
+                //     nodesTitle = nodesTitle.concat(tempString+'\n');
+                //     //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+                // }
                 else if(key == "Plan Rows")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
