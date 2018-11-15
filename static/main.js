@@ -513,8 +513,8 @@ function Graph() {
             else if (key == "Plans"){
                 console.log(nodeTextObject[key][0]);
                 if(nodeTextObject[key][0]["Node Type"]=="Seq Scan"){
-                    word = String(nodeTextObject[key][0]["RelaName"]);
-                    if(word == String(nodeTextObject[key][0]["Aliastion "])) {
+                    word = String(nodeTextObject[key][0]["Relation Name"]);
+                    if(word == String(nodeTextObject[key][0]["Alias"])) {
                         highlight(word);
                     }
                     else{
