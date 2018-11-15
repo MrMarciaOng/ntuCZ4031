@@ -504,23 +504,19 @@ function Graph() {
                 }
             }
             else if(key =="Hash Cond") {
-                if (word==""){
-                    word = String(nodeTextObject[key]);
-                }
+                word = String(nodeTextObject[key]);
                 highlight(word);
             }
+            else if(key =="Index Cond") {
+                word = String(nodeTextObject[key]);
+                highlight(word);
+            }   
+            else if(key =="Merge Cond") {
+                word = String(nodeTextObject[key]);
+                highlight(word);
+            }   
             else if (key == "Plans"){
-                console.log(nodeTextObject[key][0]);
-                if(nodeTextObject[key][0]["Node Type"]=="Seq Scan"){
-                    word = String(nodeTextObject[key][0]["Relation Name"]);
-                    if(word == String(nodeTextObject[key][0]["Alias"])) {
-                        highlight(word);
-                    }
-                    else{
-                        word = word + " " + String(nodeTextObject[key][0]["Alias"]);
-                        highlight(word);
-                    }
-                } 
+                highlightBody(nodeTextObject[key]);
             } 
         });
         if(ids==1){
@@ -528,3 +524,40 @@ function Graph() {
         }
     })
 };
+
+function highlightBody(plans){
+    var size = plans.length;
+    var i;
+    var word = "";
+    for(i=0;i<size;i++){
+        if(plans[i]["Relation Name"]!=null){
+            word = String(plans[i]["Relation Name"]);
+            if(word == String(plans[i]["Alias"])) {
+                highlight(word);
+            }
+            else{
+                word = word + " " + String(plans[i]["Alias"]);
+                highlight(word);
+            }
+        }
+        else if(plans[i]["Hash Cond"]!=null){
+            word = String(plans[i]["Hash Cond"]);
+            highlight(word);
+        }
+        else if(plans[i]["Index Cond"]!=null){
+            word = String(plans[i]["Index Cond"]);
+            highlight(word);
+        }
+        else if(plans[i]["Merge Cond"]!=null){
+            word = String(plans[i]["Merge Cond"]);
+            highlight(word);
+        }
+        else if(plans[i]["SOrt Key"]!=null){
+            word = String(plans[i]["Sort Key"]);
+            highlight(word);
+        }
+        else if(plans[i]["Plans"]!=null){
+                highlightBody(plans[i]["Plans"]);
+            }
+        } 
+    }
