@@ -1,74 +1,77 @@
 <html>
-	<head>
-		<title>Settings</title>
-		<script src="../static/jquery.min.js"></script>
-		<script src="../static/bootstrap.js"></script>
-		<script src="../static/setting.js"></script>
 
-		<link href="../static/font.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../static/style.css">
-		<link rel="stylesheet" type="text/css" href="../static/custom.css">
-		<script>
-			function formatData(type) {
-				const db_name = document.getElementById("db_name").value || "CZ4031";
-				const user = document.getElementById("user").value || "postgres";
-				const password = document.getElementById("password").value || "admin";
-				const host = document.getElementById("host").value || "localhost";
-				const port = document.getElementById("port").value || "5432";
-				const payload = {type, data: {db_name, user, password, host, port}};
-				handleSubmit(payload);
-			}
-		</script>
-	</head>
-	<body>
-		<div>
-			<h1>CZ4031 - Project 2</h1></a>
-			<p>
-					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-							<div class="navbar-nav">
-							<a class="nav-item nav-link" href="/">Home </a>
-							<a class="nav-item nav-link" href="/query">Query</a>
-							<a class="nav-item nav-link" href="/plan">Plan</a>
-							<a class="nav-item nav-link active" href="/settings">Settings<span class="sr-only">(current)</span></a>
-							</div>
-						</div>
-					</nav>
-			</p>
-			<h2>Settings</h2>
-			<h3>Connect to Database</h3>
-			<table>
-				<tr>
-					<td>Database Name</td>
-					<td><input placeholder="CZ4031" id="db_name" type="text"></input></td>
-				</tr>
-				<tr>
-						<td>User</td>
-						<td><input placeholder="postgres" id="user" type="text"></input></td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td><input placeholder="admin" id="password" type="password" </input></td>
-				</tr>
-				<tr>
-						<td>Host</td>
-						<td><input placeholder="localhost" id="host" type="text"></input></td>
-				</tr>
-				<tr>
-					<td>Port</td>
-					<td><input placeholder="5432" id="port" type="text"></input></td>
-				</tr>
-				<tr>
-					<td>
-						<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(0)">Connect</button>
-					</td>
-				</tr>
-            </table>
-            <div class="alert alert-dark"  style="display:none" role="alert" id="result"></div>
-			</div>
-	</body>
+<head>
+	<title>Settings</title>
+	<script src="../static/jquery.min.js"></script>
+	<script src="../static/bootstrap.js"></script>
+	<script src="../static/setting.js"></script>
+
+	<link href="../static/font.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<link rel="stylesheet" type="text/css" href="../static/custom.css">
+	<script>
+		function formatData(type) {
+			const db_name = document.getElementById("db_name").value || "CZ4031";
+			const user = document.getElementById("user").value || "postgres";
+			const password = document.getElementById("password").value || "admin";
+			const host = document.getElementById("host").value || "localhost";
+			const port = document.getElementById("port").value || "5432";
+			const payload = { type, data: { db_name, user, password, host, port } };
+			handleSubmit(payload);
+		}
+	</script>
+</head>
+
+<body>
+	<div>
+		<div class="typewriter">
+			<h1>CZ4031 Database- Project 2</h1>
+		</div>
+		<p>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+				 aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<a class="nav-item nav-link" href="/">Home </a>
+						<a class="nav-item nav-link" href="/query">Query</a>
+						<a class="nav-item nav-link" href="/plan">Plan</a>
+						<a class="nav-item nav-link active" href="/settings">Settings<span class="sr-only">(current)</span></a>
+					</div>
+				</div>
+			</nav>
+		</p>
+		<h2>Settings</h2>
+		<h3>Connect to Database</h3>
+		<table>
+			<tr>
+				<td>Database Name</td>
+				<td><input placeholder="CZ4031" id="db_name" type="text"></input></td>
+			</tr>
+			<tr>
+				<td>User</td>
+				<td><input placeholder="postgres" id="user" type="text"></input></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input placeholder="admin" id="password" type="password" </input> </td> </tr> <tr>
+				<td>Host</td>
+				<td><input placeholder="localhost" id="host" type="text"></input></td>
+			</tr>
+			<tr>
+				<td>Port</td>
+				<td><input placeholder="5432" id="port" type="text"></input></td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(0)">Connect</button>
+				</td>
+			</tr>
+		</table>
+		<div class="alert alert-dark" style="display:none" role="alert" id="result"></div>
+	</div>
+</body>
+
 </html>
-
