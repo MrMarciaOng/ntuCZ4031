@@ -1,13 +1,3 @@
-const OPERATORS = {
-    "<=": "is less than or equal to",
-    ">=": "is larger than or equal to",
-    ">": "is larger than",
-    "<": "is less than",
-    "=": "is equal to",
-    "-": "minus",
-    "\\+": "plus"
-};
-
 var ws = new WebSocket("ws://localhost:8888/websocket");
 
 ws.onmessage = function(e) {
@@ -28,9 +18,6 @@ function createGraph(data) {
 function Graph() {
     this.nodes = new vis.DataSet([]);
     this.edges = new vis.DataSet([]);
-
-    this.counter = 0;
-
 
     this.headdealer = function (arrayc) {
         console.log(arrayc);
@@ -256,4 +243,4 @@ function Graph() {
 
 
     })
-};
+}

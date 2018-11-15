@@ -7,9 +7,6 @@ from query_handler import connect, query_handler
     1: Visualize Query Execution Plan; Input: Query
     2: Input: Plan
 """
-<<<<<<< HEAD
-33
-=======
 
 defaultDBData = {
     "db_name" : "CZ4031",
@@ -19,7 +16,6 @@ defaultDBData = {
     "port" : "5432"
 }
 
->>>>>>> 13910a132e168b4be1aaec35175adbfd968c7924
 def handler(payload):
     action_type = payload["type"]
     data = payload["data"]

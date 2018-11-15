@@ -16,11 +16,7 @@ def connect(data):
         return ""
 
 def query_handler(data):
-<<<<<<< HEAD
-    query = "explain (analyze, verbose, format json) {}".format(data["query"])
-=======
     query = "explain (analyze,buffers,verbose, format json) {}".format(data["query"])
->>>>>>> 13910a132e168b4be1aaec35175adbfd968c7924
     conn = connect(data)
     cursor = conn.cursor()
 
