@@ -25,3 +25,7 @@ Use `python` or `python3` depends on your computer's python3 binary
 python app.py
 ```
 3. Go to your browser and navigate to `localhost:8888`
+
+4. Go to settings page to connect to the database
+
+5. Graph need some time to be shown depending of the query complexity
