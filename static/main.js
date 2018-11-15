@@ -343,12 +343,16 @@ function Graph() {
     };
     console.log(this.nodes);
     this.options = {
+
+        physics : false,
         edges: {
             font: {
                 size: 12
             }
         },
         nodes: {
+
+            chosen: false,
             shape: 'box',
             font: {
                 bold: {
@@ -362,8 +366,8 @@ function Graph() {
                 direction: "DU",
                 sortMethod: "directed",
                 levelSeparation: 256,
-                nodeSpacing: 720,
-                treeSpacing: 1000,
+                nodeSpacing: 420,
+                treeSpacing: 666,
             }
             
         }
