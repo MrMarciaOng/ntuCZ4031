@@ -17,7 +17,7 @@ def connect(data):
         return ""
 
 def query_handler(data):
-    query = "explain (analyze, format json) {}".format(data["query"])
+    query = "explain (analyze, verbose, format json) {}".format(data["query"])
     conn = connect(data)
     cursor = conn.cursor()
 

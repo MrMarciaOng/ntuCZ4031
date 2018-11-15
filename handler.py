@@ -8,7 +8,7 @@ from query_handler import connect, query_handler
     1: Explain Query Execution Plan; Input: Query
     2: Input: Plan
 """
-
+33
 def handler(payload):
     action_type = payload["type"]
     data = payload["data"]
