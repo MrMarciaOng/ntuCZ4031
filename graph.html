@@ -486,7 +486,7 @@
             var minWidth = 20;
             var widthFactor = params.iterations / params.total;
             var width = Math.max(minWidth, maxWidth * widthFactor);
-
+            document.getElementById('loadingBar').style.opacity = 1;
             document.getElementById('bar').style.width = width + 'px';
             document.getElementById('text').innerHTML = Math.round(widthFactor * 100) + '%';
         });
@@ -533,7 +533,7 @@
             </div>
         </li>
     </ul>
-    <div id="loadingBar">
+    <div id="loadingBar" style="    opacity: 0;">
         <div class="outerBorder">
             <div id="text">0%</div>
             <div id="border">
