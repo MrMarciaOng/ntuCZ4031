@@ -1,8 +1,8 @@
 var ws = new WebSocket("ws://localhost:8888/websocket");
 
-ws.onmessage = function(e) {
-	console.log(e)
-    createGraph(e.data);	
+ws.onmessage = function (e) {
+    console.log(e)
+    createGraph(e.data);
 }
 
 function handleSubmit(e) {
@@ -18,6 +18,9 @@ function createGraph(data) {
 function Graph() {
     this.nodes = new vis.DataSet([]);
     this.edges = new vis.DataSet([]);
+
+    this.counter = 0;
+
 
     this.headdealer = function (arrayc) {
         console.log(arrayc);
@@ -184,6 +187,7 @@ function Graph() {
                 nodeSpacing: 720,
                 treeSpacing: 1000,
             }
+
         }
     };
 
@@ -232,8 +236,7 @@ function Graph() {
 
             tbl.appendChild(row); // add the row to the end of the table body
         });//close
-        // div_nodetext.removeChild();
-        // div_nodetext.appendChild(tbl);
+
         if(div_nodetext.firstChild != null){
             div_nodetext.replaceChild(tbl, div_nodetext.firstChild);
         }
@@ -241,6 +244,5 @@ function Graph() {
             div_nodetext.appendChild(tbl);
         }
 
-
     })
-}
+};
