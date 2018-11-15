@@ -1,70 +1,63 @@
 <html>
 	<head>
-
-
+		<title>Settings</title>
 		<script src="../static/jquery.min.js"></script>
-
-		<title>Query Visualizer Page</title>
-
+		<script src="../static/bootstrap.js"></script>
 		<script src="../static/setting.js"></script>
-		<script type="text/javascript" src="../static/vis.js"></script>
-	    <link href="../static/vis-network.css" rel="stylesheet" type="text/css" />
+
 		<link href="https://fonts.googleapis.com/css?family=Open+sans|Roboto+Slab" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../static/style.css">
-		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-		
 		<script>
 			function formatData(type) {
 				const db_name = document.getElementById("db_name").value || "CZ4031";
 				const user = document.getElementById("user").value || "postgres";
-				const password = document.getElementById("password").value || "postgres";
+				const password = document.getElementById("password").value || "admin";
 				const host = document.getElementById("host").value || "localhost";
 				const port = document.getElementById("port").value || "5432";
 				const payload = {type, data: {db_name, user, password, host, port}};
 				handleSubmit(payload);
 			}
 		</script>
-		<style type="text/css">
-			#graph {
-				width: 600px;
-				height: 400px;
-				border: 1px solid lightgray;
-			}
-		</style>
 	</head>
 	<body>
 		<div>
 			<h1>CZ4031 - Project 2</h1></a>
 			<p>
 					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-							  <span class="navbar-toggler-icon"></span>
-							</button>
-							<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-							  <div class="navbar-nav">
-								<a class="nav-item nav-link" href="/">Home </a>
-								<a class="nav-item nav-link" href="/query">Query</a>
-								<a class="nav-item nav-link" href="/plan">Plan</a>
-                                <a class="nav-item nav-link active" href="/settings">Settings<span class="sr-only">(current)</span></a>
-							  </div>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+							<div class="navbar-nav">
+							<a class="nav-item nav-link" href="/">Home </a>
+							<a class="nav-item nav-link" href="/query">Query</a>
+							<a class="nav-item nav-link" href="/plan">Plan</a>
+							<a class="nav-item nav-link active" href="/settings">Settings<span class="sr-only">(current)</span></a>
 							</div>
-						  </nav>
+						</div>
+					</nav>
 			</p>
 			<h2>Settings</h2>
 			<h3>Connect to Database</h3>
 			<table>
 				<tr>
 					<td>Database Name</td>
-					<td>User</td>
-					<td>Password</td>
-					<td>Host</td>
-					<td>Port</td>
+					<td><input placeholder="CZ4031" id="db_name" type="text"></input></td>
 				</tr>
 				<tr>
-					<td><input placeholder="CZ4031" id="db_name" type="text"></input></td>
-					<td><input placeholder="postgres" id="user" type="text"></input></td>
+						<td>User</td>
+						<td><input placeholder="postgres" id="user" type="text"></input></td>
+				</tr>
+				<tr>
+					<td>Password</td>
 					<td><input placeholder="admin" id="password" type="password" </input></td>
-					<td><input placeholder="localhost" id="host" type="text"></input></td>
+				</tr>
+				<tr>
+						<td>Host</td>
+						<td><input placeholder="localhost" id="host" type="text"></input></td>
+				</tr>
+				<tr>
+					<td>Port</td>
 					<td><input placeholder="5432" id="port" type="text"></input></td>
 				</tr>
 				<tr>
@@ -75,10 +68,6 @@
             </table>
             <div id="result"></div>
 			</div>
-			
-		
-		<!-- <button class="command" onclick="speak()">Speak</button> -->
-
 	</body>
 </html>
 

@@ -1,6 +1,5 @@
 import psycopg2
 import json
-# from index import explain
 
 def connect(data):
     db_name = data["db_name"]
@@ -24,7 +23,6 @@ def query_handler(data):
     try:
         cursor.execute(query)
         plan = cursor.fetchall()
-       
     except Exception as err:
         print(err)
         return "Query Error : Please check input"
