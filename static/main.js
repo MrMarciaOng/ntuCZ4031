@@ -11,6 +11,20 @@ function handleSubmit(e) {
     ws.send(JSON.stringify(e));
 }
 
+function highlight(word) {
+    var rgxp = new RegExp(word);
+    var repl = '<span style="background-color:#343a40; color:#FFFFFF">' + word + '</span>';
+    document.getElementById("highlight").innerHTML =  document.getElementById("highlight").innerHTML.replace(rgxp, repl);   
+}
+
+function highlightAll() {
+    var repl = '<span style="background-color:#343a40; color:#FFFFFF">' + hword + '</span>';
+    document.getElementById("highlight").innerHTML =  repl;   
+}
+
+function unhighlight(){
+    document.getElementById("highlight").innerHTML = hword;
+}
 
 function createGraph(data) {
     console.log(data);
