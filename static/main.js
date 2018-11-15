@@ -140,15 +140,15 @@ this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
     }
     else if (nodetype == "Hash")
     {
-        this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle, display: newObj"})
+        this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle", display: newObj})
     }
     else if (nodetype == "Nested Loop")
     {
-        this.nodes.add({id: counter,color : "#ad6e4a",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle, display: newObj"})
+        this.nodes.add({id: counter,color : "#ad6e4a",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle", display: newObj})
     }
     else if (nodetype == "Merge Join")
     {
-        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>',shape : "circle, display: newObj"})
+        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>',shape : "circle", display: newObj})
     }
 
     else if (nodetype == "Seq Scan")
@@ -161,7 +161,7 @@ this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
     }
     else if (nodetype == "Values Scan")
     {
-        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box, display: newObj"})
+        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box", display: newObj})
     }
 
     else if (nodetype == "Index Only Scan")
@@ -183,7 +183,7 @@ this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
     }
     else if (nodetype == "Aggregate")
     {
-        this.nodes.add({id: counter,color : "#a37d7d",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "diamond, display: newObj"})
+        this.nodes.add({id: counter,color : "#a37d7d",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "diamond", display: newObj})
     }
     else
     {
@@ -362,6 +362,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
         console.log(this.body.nodes[ids]);
         var clickedNodes = this.body.nodes[ids];
         var nodeTextObject = clickedNodes["shape"]["labelModule"]["elementOptions"].display;
+        console.log(nodeTextObject);
 
         // get the reference for the body
         var div_nodetext = document.getElementById('nodetext');
