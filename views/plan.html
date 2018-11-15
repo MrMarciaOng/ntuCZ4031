@@ -18,86 +18,299 @@
 			const payload = { type, data: { plan } };
 			handleSubmit(payload);
 		}
-		function giveSample() {
+		function giveSample(number) {
 			var sample =
-			{
-				"Plan": {
-					"Node Type": "Hash Join",
-					"Parallel Aware": false,
-					"Join Type": "Inner",
-					"Startup Cost": 1.54,
-					"Total Cost": 5657.03,
-					"Plan Rows": 143999,
-					"Plan Width": 600,
-					"Actual Startup Time": 0.27,
-					"Actual Total Time": 369.85,
-					"Actual Rows": 144074,
-					"Actual Loops": 1,
-					"Inner Unique": true,
-					"Hash Cond": "(c.c_nationkey = n.n_nationkey)",
-					"Plans": [
-						{
-							"Node Type": "Seq Scan",
-							"Parent Relationship": "Outer",
-							"Parallel Aware": false,
-							"Relation Name": "customer",
-							"Alias": "c",
-							"Startup Cost": 0,
-							"Total Cost": 5194.99,
-							"Plan Rows": 149999,
-							"Plan Width": 162,
-							"Actual Startup Time": 0.043,
-							"Actual Total Time": 110.056,
-							"Actual Rows": 149999,
-							"Actual Loops": 1
-						},
-						{
-							"Node Type": "Hash",
-							"Parent Relationship": "Inner",
-							"Parallel Aware": false,
-							"Startup Cost": 1.24,
-							"Total Cost": 1.24,
-							"Plan Rows": 24,
-							"Plan Width": 438,
-							"Actual Startup Time": 0.091,
-							"Actual Total Time": 0.091,
-							"Actual Rows": 24,
-							"Actual Loops": 1,
-							"Hash Buckets": 1024,
-							"Original Hash Buckets": 1024,
-							"Hash Batches": 1,
-							"Original Hash Batches": 1,
-							"Peak Memory Usage": 12,
-							"Plans": [
-								{
-									"Node Type": "Seq Scan",
-									"Parent Relationship": "Outer",
-									"Parallel Aware": false,
-									"Relation Name": "nation",
-									"Alias": "n",
-									"Startup Cost": 0,
-									"Total Cost": 1.24,
-									"Plan Rows": 24,
-									"Plan Width": 438,
-									"Actual Startup Time": 0.025,
-									"Actual Total Time": 0.036,
-									"Actual Rows": 24,
-									"Actual Loops": 1
-								}
-							]
-						}
-					]
+				[{
+					"Plan": {
+						"Node Type": "Hash Join",
+						"Parallel Aware": false,
+						"Join Type": "Inner",
+						"Startup Cost": 1.54,
+						"Total Cost": 5657.03,
+						"Plan Rows": 143999,
+						"Plan Width": 600,
+						"Actual Startup Time": 0.27,
+						"Actual Total Time": 369.85,
+						"Actual Rows": 144074,
+						"Actual Loops": 1,
+						"Inner Unique": true,
+						"Hash Cond": "(c.c_nationkey = n.n_nationkey)",
+						"Plans": [
+							{
+								"Node Type": "Seq Scan",
+								"Parent Relationship": "Outer",
+								"Parallel Aware": false,
+								"Relation Name": "customer",
+								"Alias": "c",
+								"Startup Cost": 0,
+								"Total Cost": 5194.99,
+								"Plan Rows": 149999,
+								"Plan Width": 162,
+								"Actual Startup Time": 0.043,
+								"Actual Total Time": 110.056,
+								"Actual Rows": 149999,
+								"Actual Loops": 1
+							},
+							{
+								"Node Type": "Hash",
+								"Parent Relationship": "Inner",
+								"Parallel Aware": false,
+								"Startup Cost": 1.24,
+								"Total Cost": 1.24,
+								"Plan Rows": 24,
+								"Plan Width": 438,
+								"Actual Startup Time": 0.091,
+								"Actual Total Time": 0.091,
+								"Actual Rows": 24,
+								"Actual Loops": 1,
+								"Hash Buckets": 1024,
+								"Original Hash Buckets": 1024,
+								"Hash Batches": 1,
+								"Original Hash Batches": 1,
+								"Peak Memory Usage": 12,
+								"Plans": [
+									{
+										"Node Type": "Seq Scan",
+										"Parent Relationship": "Outer",
+										"Parallel Aware": false,
+										"Relation Name": "nation",
+										"Alias": "n",
+										"Startup Cost": 0,
+										"Total Cost": 1.24,
+										"Plan Rows": 24,
+										"Plan Width": 438,
+										"Actual Startup Time": 0.025,
+										"Actual Total Time": 0.036,
+										"Actual Rows": 24,
+										"Actual Loops": 1
+									}
+								]
+							}
+						]
+					},
+					"Planning Time": 5.073,
+					"Triggers": [],
+					"Execution Time": 384.985
 				},
-				"Planning Time": 5.073,
-				"Triggers": [],
-				"Execution Time": 384.985
-			}
+				{
+					"Plan": {
+						"Inner Unique": false,
+						"Startup Cost": 30396.99,
+						"Plans": [
+							{
+								"Inner Unique": false,
+								"Startup Cost": 0.14,
+								"Plans": [
+									{
+										"Startup Cost": 0.14,
+										"Scan Direction": "Forward",
+										"Plan Width": 438,
+										"Node Type": "Index Scan",
+										"Plan Rows": 24,
+										"Relation Name": "nation",
+										"Alias": "n",
+										"Parallel Aware": false,
+										"Parent Relationship": "Outer",
+										"Total Cost": 12.5,
+										"Index Name": "nation_pkey"
+									},
+									{
+										"Startup Cost": 0,
+										"Plans": [
+											{
+												"Startup Cost": 0,
+												"Node Type": "Seq Scan",
+												"Plan Rows": 1499999,
+												"Relation Name": "orders",
+												"Alias": "o",
+												"Parallel Aware": false,
+												"Parent Relationship": "Outer",
+												"Plan Width": 111,
+												"Total Cost": 42569.99
+											}
+										],
+										"Node Type": "Materialize",
+										"Plan Rows": 1499999,
+										"Parallel Aware": false,
+										"Parent Relationship": "Inner",
+										"Plan Width": 111,
+										"Total Cost": 74972.99
+									}
+								],
+								"Node Type": "Nested Loop",
+								"Plan Rows": 35999976,
+								"Join Type": "Inner",
+								"Parallel Aware": false,
+								"Parent Relationship": "Outer",
+								"Plan Width": 549,
+								"Total Cost": 1094004.18
+							},
+							{
+								"Startup Cost": 30396.85,
+								"Plans": [
+									{
+										"Startup Cost": 30396.85,
+										"Plans": [
+											{
+												"Startup Cost": 0,
+												"Node Type": "Seq Scan",
+												"Plan Rows": 149999,
+												"Relation Name": "customer",
+												"Alias": "c",
+												"Parallel Aware": false,
+												"Parent Relationship": "Outer",
+												"Plan Width": 162,
+												"Total Cost": 5194.99
+											}
+										],
+										"Sort Key": [
+											"c.c_nationkey"
+										],
+										"Node Type": "Sort",
+										"Plan Rows": 149999,
+										"Parallel Aware": false,
+										"Parent Relationship": "Outer",
+										"Plan Width": 162,
+										"Total Cost": 30771.85
+									}
+								],
+								"Node Type": "Materialize",
+								"Plan Rows": 149999,
+								"Parallel Aware": false,
+								"Parent Relationship": "Inner",
+								"Plan Width": 162,
+								"Total Cost": 31146.84
+							}
+						],
+						"Node Type": "Merge Join",
+						"Plan Rows": 215998416001,
+						"Join Type": "Inner",
+						"Parallel Aware": false,
+						"Plan Width": 719,
+						"Merge Cond": "(n.n_nationkey = c.c_nationkey)",
+						"Total Cost": 3241191015.99
+					}
+				},
+				{
+					"Plan": {
+						"Startup Cost": 293841.63,
+						"Plans": [
+							{
+								"Inner Unique": true,
+								"Startup Cost": 292841.61,
+								"Plans": [
+									{
+										"Startup Cost": 292839.82,
+										"Plans": [
+											{
+												"Inner Unique": true,
+												"Startup Cost": 10585.98,
+												"Plans": [
+													{
+														"Startup Cost": 0,
+														"Node Type": "Seq Scan",
+														"Plan Rows": 625000,
+														"Relation Name": "orders",
+														"Alias": "o",
+														"Parallel Aware": true,
+														"Parent Relationship": "Outer",
+														"Plan Width": 111,
+														"Total Cost": 33820
+													},
+													{
+														"Startup Cost": 5194.99,
+														"Plans": [
+															{
+																"Startup Cost": 0,
+																"Node Type": "Seq Scan",
+																"Plan Rows": 149999,
+																"Relation Name": "customer",
+																"Alias": "c",
+																"Parallel Aware": false,
+																"Parent Relationship": "Outer",
+																"Plan Width": 162,
+																"Total Cost": 5194.99
+															}
+														],
+														"Node Type": "Hash",
+														"Plan Rows": 149999,
+														"Parallel Aware": false,
+														"Parent Relationship": "Inner",
+														"Plan Width": 162,
+														"Total Cost": 5194.99
+													}
+												],
+												"Node Type": "Hash Join",
+												"Plan Rows": 625000,
+												"Join Type": "Inner",
+												"Parallel Aware": false,
+												"Hash Cond": "(o.o_custkey = c.c_custkey)",
+												"Parent Relationship": "Outer",
+												"Plan Width": 273,
+												"Total Cost": 70314.64
+											}
+										],
+										"Sort Key": [
+											"c.c_nationkey"
+										],
+										"Node Type": "Sort",
+										"Plan Rows": 625000,
+										"Parallel Aware": false,
+										"Parent Relationship": "Outer",
+										"Plan Width": 273,
+										"Total Cost": 294402.32
+									},
+									{
+										"Startup Cost": 1.79,
+										"Plans": [
+											{
+												"Startup Cost": 0,
+												"Node Type": "Seq Scan",
+												"Plan Rows": 24,
+												"Relation Name": "nation",
+												"Alias": "n",
+												"Parallel Aware": false,
+												"Parent Relationship": "Outer",
+												"Plan Width": 438,
+												"Total Cost": 1.24
+											}
+										],
+										"Sort Key": [
+											"n.n_nationkey"
+										],
+										"Node Type": "Sort",
+										"Plan Rows": 24,
+										"Parallel Aware": false,
+										"Parent Relationship": "Inner",
+										"Plan Width": 438,
+										"Total Cost": 1.85
+									}
+								],
+								"Node Type": "Merge Join",
+								"Plan Rows": 600000,
+								"Join Type": "Inner",
+								"Parallel Aware": false,
+								"Parent Relationship": "Outer",
+								"Plan Width": 711,
+								"Merge Cond": "(c.c_nationkey = n.n_nationkey)",
+								"Total Cost": 301966.73
+							}
+						],
+						"Workers Planned": 2,
+						"Node Type": "Gather Merge",
+						"Plan Rows": 1439999,
+						"Parallel Aware": false,
+						"Plan Width": 711,
+						"Total Cost": 469178.37
+					}
+				}
+				]
 				;
-			sample = JSON.stringify(sample);
+			sample = JSON.stringify(sample[number]);
 			document.getElementById("plan").value = sample;
 		}
 	</script>
-		<style type="text/css">
+	<style type="text/css">
 		#graph {
 			width: 2400px;
 			height: 800px;
@@ -139,20 +352,24 @@
 		<div>
 			<textarea placeholder="Input your QEP here" id="plan" rows="10" cols="75"></textarea>
 		</div>
-		<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
+		<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample(0)">Sample 1</button>
+		<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample(1)">Sample 2</button>
+		<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample(2)">Sample 3</button>
 		<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(2)">Visualize</button>
-		
+
 		<div id="highlight"></div>
-		<h3><div id="gtitle"> Graph</div></h3>
+		<h3>
+			<div id="gtitle"> Graph</div>
+		</h3>
 		<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;">
-				<div id="legend"style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 300px;min-length : 1080px"></div>
-				<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 1080px">
-					<div class="row" style="min-height:inherit; min-width:inherit;  padding-left: 14;">
-						
-						<div class="col-sm-8" id="graph"></div>
-						<div class="col-sm-4 table table-responsive" id="nodetext"></div>
-					</div>
+			<div id="legend" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 300px;min-length : 1080px"></div>
+			<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 1080px">
+				<div class="row" style="min-height:inherit; min-width:inherit;  padding-left: 14;">
+
+					<div class="col-sm-8" id="graph"></div>
+					<div class="col-sm-4 table table-responsive" id="nodetext"></div>
 				</div>
-	
 			</div>
+
+		</div>
 	</div>
