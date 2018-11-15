@@ -26,6 +26,12 @@
 				const sample = "Select * from customer c, nation n where c.c_nationkey = n.n_nationkey";
 				document.getElementById("query").value = sample;
 			}
+
+			function zoomGraph() {
+				var elmnt = document.getElementById("gtitle");
+				elmnt.scrollIntoView();
+
+		}
 		</script>
 		<style type="text/css">
 			#graph {
@@ -59,8 +65,8 @@
 				<textarea placeholder="Input your query here" id="query" rows="20" cols="75"></textarea>
 			</div>
 			<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
-			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1)">Visualize</button>
-			<h3>Graph</h3>
+			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1);zoomGraph()">Visualize</button>
+			<h3><div id = "gtitle"> Graph</div></h3>
 			<div id="graph"></div>
 			<div id="nodetext"></div>
 			</div>

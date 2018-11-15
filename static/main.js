@@ -24,13 +24,15 @@ this.maxCost = 0;
 
 var biggestbody = 0;
 var biggestbodyid; 
+var biggestbodyparent;
 
 function finaledit(data)
 {
 
     console.log("BIGGEST BODY ID:" +biggestbodyid)
     console.log(data);
-    data.nodes.update({id: biggestbodyid,  color: {border: 'orange'}});
+    data.nodes.update({id: biggestbodyid,  color: {border: 'RED'}});
+    data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost', font: {strokeWidth: 2, strokeColor : 'RED'}});
 
 };
 
@@ -140,15 +142,15 @@ this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
     }
     else if (nodetype == "Hash")
     {
-        this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle, display: newObj"})
+        this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle", display: newObj})
     }
     else if (nodetype == "Nested Loop")
     {
-        this.nodes.add({id: counter,color : "#ad6e4a",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle, display: newObj"})
+        this.nodes.add({id: counter,color : "#ad6e4a",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle", display: newObj})
     }
     else if (nodetype == "Merge Join")
     {
-        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>',shape : "circle, display: newObj"})
+        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>',shape : "circle", display: newObj})
     }
 
     else if (nodetype == "Seq Scan")
@@ -161,7 +163,7 @@ this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
     }
     else if (nodetype == "Values Scan")
     {
-        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box, display: newObj"})
+        this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box", display: newObj})
     }
 
     else if (nodetype == "Index Only Scan")
@@ -183,7 +185,7 @@ this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
     }
     else if (nodetype == "Aggregate")
     {
-        this.nodes.add({id: counter,color : "#a37d7d",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "diamond, display: newObj"})
+        this.nodes.add({id: counter,color : "#a37d7d",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "diamond", display: newObj})
     }
     else
     {
@@ -231,6 +233,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
                 {
                     biggestbody = temphold;
                     biggestbodyid = holdcount;
+                    biggestbodyparent = parentcounter;
                     console.log("CURRENT BIGGEST LAAAHH"+biggestbodyid);
                     nodesLabel = nodesLabel.concat("<b>"+tempString+"</b>" +'\n');
                     nodesTitle = nodesTitle.concat(tempString +'\n');
