@@ -5,8 +5,9 @@
 		<script src="../static/bootstrap.js"></script>
 		<script src="../static/setting.js"></script>
 
-		<link href="https://fonts.googleapis.com/css?family=Open+sans|Roboto+Slab" rel="stylesheet">
+		<link href="../static/font.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../static/style.css">
+		<link rel="stylesheet" type="text/css" href="../static/custom.css">
 		<script>
 			function formatData(type) {
 				const db_name = document.getElementById("db_name").value || "CZ4031";
@@ -66,7 +67,7 @@
 					</td>
 				</tr>
             </table>
-            <div class="alert alert-dark" role="alert" id="result"></div>
+            <div class="alert alert-dark"  style="display:none" role="alert" id="result"></div>
 			</div>
 	</body>
 </html>

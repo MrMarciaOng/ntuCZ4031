@@ -8,8 +8,9 @@
 		<script type="text/javascript" src="../static/vis.js"></script>
 
 	    <link href="../static/vis-network.css" rel="stylesheet" type="text/css" />
-		<link href="https://fonts.googleapis.com/css?family=Open+sans|Roboto+Slab" rel="stylesheet">
+		<link href="../static/font.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../static/style.css">
+		<link rel="stylesheet" type="text/css" href="../static/custom.css">
 		
 		<script>
 			function formatData(type) {
@@ -19,6 +20,7 @@
 				const host = null;
 				const port =null;
 				const query = document.getElementById("query").value;
+				document.getElementById("highlight").innerHTML = query;
 				const payload = {type, data: {db_name, user, password, host, port, query}};
 				handleSubmit(payload);
 			}
@@ -26,10 +28,16 @@
 				const sample = "Select * from customer c, nation n where c.c_nationkey = n.n_nationkey";
 				document.getElementById("query").value = sample;
 			}
+
+			function zoomGraph() {
+				var elmnt = document.getElementById("gtitle");
+				elmnt.scrollIntoView();
+
+		}
 		</script>
 		<style type="text/css">
 			#graph {
-				width: 600px;
+				width: 2400px;
 				height: 400px;
 				border: 1px solid lightgray;
 			}
@@ -59,16 +67,17 @@
 				<textarea placeholder="Input your query here" id="query" rows="20" cols="75"></textarea>
 			</div>
 			<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
-			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1)">Visualize</button>
-			<h3>Graph</h3>
+			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1);zoomGraph()">Visualize</button>
+			<div id="highlight"></div>		
 			<div class="container">
+			<h3><div class="col-sm-8" id = "gtitle"> Graph</div></h3>			
+			<div class="container"style="padding-left: 0px;margin-left: 0px;">
 				<div class="row">
 					<div class="col-sm-8" id="graph"></div>
 					<div class="col-sm-4 table table-responsive" id="nodetext"></div>
 				</div>
-				
 			</div>
-			
+
 			</div>
 	</body>
 </html>
