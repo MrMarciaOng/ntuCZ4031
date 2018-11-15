@@ -1,91 +1,90 @@
 <html>
+	<head>
+		<title>Query Visualizer</title>
 
-<head>
-	<title>Query Visualizer</title>
+		<script src="../static/jquery.min.js"></script>
+		<script src="../static/bootstrap.js"></script>
+		<script src="../static/main.js"></script>
+		<script type="text/javascript" src="../static/vis.js"></script>
 
-	<script src="../static/jquery.min.js"></script>
-	<script src="../static/bootstrap.js"></script>
-	<script src="../static/main.js"></script>
-	<script type="text/javascript" src="../static/vis.js"></script>
+	    <link href="../static/vis-network.css" rel="stylesheet" type="text/css" />
+		<link href="../static/font.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../static/style.css">
+		<link rel="stylesheet" type="text/css" href="../static/custom.css">
+		
+		<script>
+			function formatData(type) {
+				const db_name =null;
+				const user = null;
+				const password = null;
+				const host = null;
+				const port =null;
+				const query = document.getElementById("query").value;
+				document.getElementById("highlight").innerHTML = query;
+				const payload = {type, data: {db_name, user, password, host, port, query}};
+				handleSubmit(payload);
+			}
+			function giveSample(){
+				const sample = "Select * from customer c, nation n where c.c_nationkey = n.n_nationkey";
+				document.getElementById("query").value = sample;
+			}
 
-	<link href="../static/vis-network.css" rel="stylesheet" type="text/css" />
-	<link href="../static/font.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../static/style.css">
-	<link rel="stylesheet" type="text/css" href="../static/custom.css">
+			function zoomGraph() {
+				var elmnt = document.getElementById("gtitle");
+				elmnt.scrollIntoView();
 
-	<script>
-		function formatData(type) {
-			const db_name = null;
-			const user = null;
-			const password = null;
-			const host = null;
-			const port = null;
-			const query = document.getElementById("query").value;
-			const payload = { type, data: { db_name, user, password, host, port, query } };
-			handleSubmit(payload);
 		}
-		function giveSample() {
-			const sample = "Select * from customer c, nation n where c.c_nationkey = n.n_nationkey";
-			document.getElementById("query").value = sample;
-		}
-
-		function zoomGraph() {
-			var elmnt = document.getElementById("gtitle");
-			elmnt.scrollIntoView();
-
-		}
-	</script>
-	<style type="text/css">
-		#graph {
-			width: 2400px;
-			height: 400px;
-			border: 1px solid lightgray;
-		}
-	</style>
-</head>
-
-<body>
-	<div>
-		<div class="typewriter">
-			<h1>CZ4031 Database- Project 2</h1>
-		</div>
-		<p>
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-				 aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-					<div class="navbar-nav">
+		</script>
+		<style type="text/css">
+			#graph {
+				width: 2400px;
+				height: 400px;
+				border: 1px solid lightgray;
+			}
+			#legend {
+				width: 200px;
+				height: 400px;
+				border: 1px solid lightgray;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<h1>CZ4031 - Project 2</h1></a>
+			<p>
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+						<div class="navbar-nav">
 						<a class="nav-item nav-link" href="/">Home </a>
 						<a class="nav-item nav-link active" href="/query">Query<span class="sr-only">(current)</span></a>
 						<a class="nav-item nav-link" href="/plan">Plan</a>
 						<a class="nav-item nav-link" href="/settings">Settings</a>
+						</div>
 					</div>
+				</nav>
+			</p>
+			<h2>Query Visualizer</h2>
+			<h3>Query</h3>
+			<div>
+				<textarea placeholder="Input your query here" id="query" rows="20" cols="75"></textarea>
+			</div>
+			<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
+			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1);zoomGraph()">Visualize</button>
+			<div id="highlight"></div>		
+			<div class="container">
+			<h3><div class="col-sm-8" id = "gtitle"> Graph</div></h3>			
+			<div class="container"style="padding-left: 0px;margin-left: 0px;">
+				<div class="row">
+					<div id="legend"></div>
+					<div class="col-sm-8" id="graph"></div>
+					<div class="col-sm-4 table table-responsive" id="nodetext"></div>
 				</div>
-			</nav>
-		</p>
-		<h2>Query Visualizer</h2>
-		<hr class="my-4" style="margin-top: 5px !important; margin-bottom: 5px !important;">
-		<h3>Query</h3>
-		<div>
-			<textarea placeholder="Input your query here" id="query" rows="20" cols="75"></textarea>
-		</div>
-		<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
-		<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1);zoomGraph()">Visualize</button>
-		<h3>
-			<div class="col-sm-8" id="gtitle"> Graph</div>
-		</h3>
-		<div class="container" style="padding-left: 0px;margin-left: 0px;">
-
-			<div class="row">
-				<div id="graph"></div>
-				<div class="col-sm-4 table table-responsive" id="nodetext"></div>
 			</div>
 
-		</div>
-
-	</div>
-</body>
-
+			</div>
+	</body>
 </html>
+
