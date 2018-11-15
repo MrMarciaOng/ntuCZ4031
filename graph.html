@@ -1,270 +1,285 @@
-a<html>
+<html>
+
 <head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" />
 
 
-<style type="text/css">
-    #mynetwork {
-        width: 600px;
-        height: 400px;
-        border: 1px solid black;
-    }
-</style>
+    <style type="text/css">
+        #mynetwork {
+            width: 900px;
+            height: 700px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
+
 <body>
-<div id="mynetwork"></div>
+    <div id="mynetwork"></div>
+    <div id="nodetext"></div>
 
-<script type="text/javascript">
-// create an array with nodes
+    <script type="text/javascript">
+        // create an array with nodes
 
-//var data = new vis.DataSet();
+        //var data = new vis.DataSet();
 
-// var temp = {
-//     "employees":[
-//     {"firstName":"John", "lastName":"Doe", "employer": [ {"firstName":"Anna", "lastName":"Smith", "employer":[{"firstName":"testa", "lastName":"Smith"}]},
-//     {"firstName":"Peter", "lastName":"Jones"}]} ]
-// }
+        // var temp = {
+        //     "employees":[
+        //     {"firstName":"John", "lastName":"Doe", "employer": [ {"firstName":"Anna", "lastName":"Smith", "employer":[{"firstName":"testa", "lastName":"Smith"}]},
+        //     {"firstName":"Peter", "lastName":"Jones"}]} ]
+        // }
 
 
 
-var temp= {
-                    "Plan" : { "Inner Unique": true,"Startup Cost": 1.54,  
-                            "Plans": [{
+        var temp = {
+            "Plan": {
+                "Inner Unique": true, "Startup Cost": 1.54,
+                "Plans": [{
+                    "Startup Cost": 0,
+                    "Node Type": "Seq Scan",
+                    "Plan Rows": 149999,
+                    "Relation Name": "customer",
+                    "Alias": "customer",
+                    "Parallel Aware": false,
+                    "Parent Relationship": "Outer",
+                    "Plan Width": 162,
+                    "Total Cost": 5194.99
+                },
+                {
+                    "Startup Cost": 1.24,
+                    "Plans": [
+                        {
                             "Startup Cost": 0,
                             "Node Type": "Seq Scan",
-                            "Plan Rows": 149999,
-                            "Relation Name": "customer",
-                            "Alias": "customer",
+                            "Plan Rows": 24,
+                            "Relation Name": "nation",
+                            "Alias": "nation",
                             "Parallel Aware": false,
                             "Parent Relationship": "Outer",
-                            "Plan Width": 162,
-                            "Total Cost": 5194.99
-                            },
-                            {
-                            "Startup Cost": 1.24,
-                            "Plans": [
-                                {
-                                "Startup Cost": 0,
-                                "Node Type": "Seq Scan",
-                                "Plan Rows": 24,
-                                "Relation Name": "nation",
-                                "Alias": "nation",
-                                "Parallel Aware": false,
-                                "Parent Relationship": "Outer",
-                                "Plan Width": 438,
-                                "Total Cost": 1.24
-                                }
-                            ],
-                            "Node Type": "Hash",
-                            "Plan Rows": 24,
-                            "Parallel Aware": false,
-                            "Parent Relationship": "Inner",
                             "Plan Width": 438,
                             "Total Cost": 1.24
-                            }
-                        ],
-                            "Node Type": "Hash Join",
-                            "Plan Rows": 143999,
-                            "Join Type": "Inner",
-                            "Parallel Aware": false,
-                            "Hash Cond": "(customer.c_nationkey = nation.n_nationkey)",
-                            "Plan Width": 600,
-                            "Total Cost": 5657.03
+                        }
+                    ],
+                    "Node Type": "Hash",
+                    "Plan Rows": 24,
+                    "Parallel Aware": false,
+                    "Parent Relationship": "Inner",
+                    "Plan Width": 438,
+                    "Total Cost": 1.24
                 }
-            
-    }
-
-
-var nodes = new vis.DataSet([]);
-var edges = new vis.DataSet([]);
-
-var counter = 0;
-
-
-//nodes.add({id: counter, label: String(temp.employees[0].firstName)});
-
-headdealer(temp);
-
-function headdealer(arrayc)
-{
-
-    counter++;
-    var nodesLabel = "";
-    Object.keys(arrayc["Plan"]).forEach(function(key) {
-        if(key != "Plans"){
-            var tempString = key + ": " + String(arrayc["Plan"][key]) + '\n';
-            nodesLabel = nodesLabel.concat('<b>'+tempString+'</b>');
-        }
-
-    });
-    console.log(nodesLabel);
-    nodecreator(nodesLabel,counter,arrayc["Plan"]["Node Type"]);
-    //nodes.add({id: counter,color : {border : 'red'}, label: nodesLabel})
-    // nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
-    if(arrayc["Plan"].Plans !== undefined)
-        {
-            bodydealer(arrayc["Plan"]["Plans"],counter) // pass to recursive function
-        }
-    
-   
-}
-
-
-function nodecreator(nodesLabel,counter,nodetype)
-{
-    if (nodetype == "Hash Join")
-    {
-        nodes.add({id: counter,color : "#e0dab3", label: nodesLabel, shape : "circle", title :nodesLabel })
-    }
-    else if (nodetype == "Hash")
-    {
-        nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "circle"})
-    }
-    else if (nodetype == "Nested Loop")
-    {
-        nodes.add({id: counter,color : "#ad6e4a", label: nodesLabel, shape : "circle"})
-    }
-    else if (nodetype == "Merge Join")
-    {
-        nodes.add({id: counter,color : "#4aad69", label: nodesLabel, shape : "circle"})
-    }
-
-    else if (nodetype == "Seq Scan")
-    {
-        nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "box",title :nodesLabel})
-    }
-    else if (nodetype == "Index Scan")
-    {
-        nodes.add({id: counter,color : "#ad6e4a", label: nodesLabel, shape : "box"})
-    }
-    else if (nodetype == "Values Scan")
-    {
-        nodes.add({id: counter,color : "#4aad69", label: nodesLabel, shape : "box"})
-    }
-
-    else if (nodetype == "Index Only Scan")
-    {
-        nodes.add({id: counter,color : "#c1bfae", label: nodesLabel, shape : "box"})
-    }
-    else if (nodetype == "Subquery Scan")
-    {
-        nodes.add({id: counter,color : "#8aad4a", label: nodesLabel, shape : "box"})
-    }
-    else if (nodetype == "Function Scan")
-    {
-        nodes.add({id: counter,color : "#a37d7d", label: nodesLabel, shape : "box"})
-    }
-
-     else if (nodetype == "Sort")
-    {
-        nodes.add({id: counter,color : "#8aad4a", label: nodesLabel, shape : "diamond"})
-    }
-    else if (nodetype == "Aggregate")
-    {
-        nodes.add({id: counter,color : "#a37d7d", label: nodesLabel, shape : "diamond"})
-    }
-
-
-    else
-    {
-        nodes.add({id: counter,color : "#4aad69", label: nodesLabel})
-    }
-    /*
-   
-    
- 
-    
-
-
-  
-    
-    'Materialize'
-    'Limit'
-    'Result' 
-    'Gather'
-    'Gather Merge'
-    
-    'BitmapAnd'
-    'BitmapOr'
-    'Bitmap Heap Scan'
-    'Bitmap Index Scan'
-    'CTE Scan'
-    'Append'
-    'Unique'*/
-}
-function bodydealer(bodypart,parentcounter) // deal with everything that has plans recursively
-{
-    console.log(bodypart.length);
-
-    for(let i=0 ; i< bodypart.length;i++)
-    {
-
-    counter++;
-    var nodesLabel = "";
-    Object.keys(bodypart[i]).forEach(function(key) {
-        if(key != "Plans"){
-            var tempString = key + ": " + String(bodypart[i][key]) + '\n';
-            nodesLabel = nodesLabel.concat('<b>'+tempString+'</b>');
-        }
-
-    });
-    //nodes.add({id: counter, label: nodesLabel});
-    nodecreator(nodesLabel,counter,bodypart[i]["Node Type"]);
-    // nodes.add({id: counter, label: String("Node Type: "+bodypart[i]["Node Type"]+'\n'+ "Plan Rows: "+bodypart[i]['Total Cost']+'\n'+ "Plan Rows: "+bodypart[i]['Plan Rows'])});
-    edges.add({from: counter, to: parentcounter ,arrows : "to"})
-        if(bodypart[i].Plans != undefined)
-        {
-            bodydealer(bodypart[i].Plans,counter)
-        }
-    }
-    
-}
-
-
-// create an array with edges
-
-
-// create a network
-var container = document.getElementById('mynetwork');
-
-//provide the data in the vis format
-var data = {
-    nodes: nodes,
-    edges: edges
-};
-var options = {edges: {
-      font: {
-        size: 12
-      }
-    },
-    nodes: {
-      shape: 'box',
-      font: {
-        bold: {
-          color: '#0077aa'
-        
-        }
-      }},
-      layout: {
-            hierarchical: {
-                direction: "DU",
-                sortMethod: "directed",
-                levelSeparation: 256,
-                nodeSpacing: 720,
-                treeSpacing: 1000,
+                ],
+                "Node Type": "Hash Join",
+                "Plan Rows": 143999,
+                "Join Type": "Inner",
+                "Parallel Aware": false,
+                "Hash Cond": "(customer.c_nationkey = nation.n_nationkey)",
+                "Plan Width": 600,
+                "Total Cost": 5657.03
             }
- 
-  }
-    };
 
-// initialize your network!
-var network = new vis.Network(container, data, options);
+        }
 
 
+        var nodes = new vis.DataSet([]);
+        var edges = new vis.DataSet([]);
 
-</script>
+        var counter = 0;
+
+
+        //nodes.add({id: counter, label: String(temp.employees[0].firstName)});
+
+        headdealer(temp);
+
+        function headdealer(arrayc) {
+
+            counter++;
+            var nodesLabel = "";
+            Object.keys(arrayc["Plan"]).forEach(function (key) {
+                if (key != "Plans") {
+                    var tempString = key + ": " + String(arrayc["Plan"][key]) + '\n';
+                    nodesLabel = nodesLabel.concat(tempString);
+                }
+
+            });
+           // console.log(nodesLabel);
+
+            nodecreator(nodesLabel, counter, arrayc["Plan"]["Node Type"],arrayc["Plan"]);
+            //nodes.add({id: counter,color : {border : 'red'}, label: nodesLabel})
+            // nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
+            if (arrayc["Plan"].Plans !== undefined) {
+                bodydealer(arrayc["Plan"]["Plans"], counter) // pass to recursive function
+            }
+
+
+        }
+
+
+        function nodecreator(nodesLabel, counter, nodetype,displayNode) {
+            displayNode = displayNode || null;
+            if(displayNode!=null){
+                var newObj = JSON.parse(JSON.stringify(displayNode));
+                console.log("wtf")
+                if(newObj.Plans != null){
+                delete newObj.Plans;
+            }
+            }
+
+
+            if (nodetype == "Hash Join") {
+                nodes.add({ id: counter, color: "#e0dab3", label: nodesLabel, shape: "circle" , title: '<pre>' + nodesLabel + '</pre>', display : newObj })
+            }
+            else if (nodetype == "Hash") {
+                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "circle" })
+            }
+            else if (nodetype == "Nested Loop") {
+                nodes.add({ id: counter, color: "#ad6e4a", label: nodesLabel, shape: "circle" })
+            }
+            else if (nodetype == "Merge Join") {
+                nodes.add({ id: counter, color: "#4aad69", label: nodesLabel, shape: "circle" })
+            }
+
+            else if (nodetype == "Seq Scan") {
+               // console.log(nodesLabel);
+                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "box", title: '<pre>' + nodesLabel + '</pre>', display : newObj })
+            }
+            else if (nodetype == "Index Scan") {
+                nodes.add({ id: counter, color: "#ad6e4a", label: nodesLabel, shape: "box" })
+            }
+            else if (nodetype == "Values Scan") {
+                nodes.add({ id: counter, color: "#4aad69", label: nodesLabel, shape: "box" })
+            }
+
+            else if (nodetype == "Index Only Scan") {
+                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "box" })
+            }
+            else if (nodetype == "Subquery Scan") {
+                nodes.add({ id: counter, color: "#8aad4a", label: nodesLabel, shape: "box" })
+            }
+            else if (nodetype == "Function Scan") {
+                nodes.add({ id: counter, color: "#a37d7d", label: nodesLabel, shape: "box" })
+            }
+
+            else if (nodetype == "Sort") {
+                nodes.add({ id: counter, color: "#8aad4a", label: nodesLabel, shape: "diamond" })
+            }
+            else if (nodetype == "Aggregate") {
+                nodes.add({ id: counter, color: "#a37d7d", label: nodesLabel, shape: "diamond" })
+            }
+
+
+            else {
+                nodes.add({ id: counter, color: "#4aad69", label: nodesLabel })
+            }
+            /*
+           
+            
+         
+            
+        
+        
+          
+            
+            'Materialize'
+            'Limit'
+            'Result' 
+            'Gather'
+            'Gather Merge'
+            
+            'BitmapAnd'
+            'BitmapOr'
+            'Bitmap Heap Scan'
+            'Bitmap Index Scan'
+            'CTE Scan'
+            'Append'
+            'Unique'*/
+        }
+        function bodydealer(bodypart, parentcounter) // deal with everything that has plans recursively
+        {
+            //console.log(bodypart.length);
+
+            for (let i = 0; i < bodypart.length; i++) {
+
+                counter++;
+                var nodesLabel = "";
+                Object.keys(bodypart[i]).forEach(function (key) {
+                    if (key != "Plans") {
+                        var tempString = key + ": " + String(bodypart[i][key]) + '\n';
+                        nodesLabel = nodesLabel.concat(tempString);
+                    }
+
+                });
+                //nodes.add({id: counter, label: nodesLabel});
+                nodecreator(nodesLabel, counter, bodypart[i]["Node Type"]);
+                // nodes.add({id: counter, label: String("Node Type: "+bodypart[i]["Node Type"]+'\n'+ "Plan Rows: "+bodypart[i]['Total Cost']+'\n'+ "Plan Rows: "+bodypart[i]['Plan Rows'])});
+                edges.add({ from: counter, to: parentcounter, arrows: "to" })
+                if (bodypart[i].Plans != undefined) {
+                    bodydealer(bodypart[i].Plans, counter)
+                }
+            }
+
+        }
+
+
+        // create an array with edges
+
+
+        // create a network
+        var container = document.getElementById('mynetwork');
+
+        //provide the data in the vis format
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            edges: {
+                font: {
+                    size: 12
+                }
+            },
+            nodes: {
+                shape: 'box',
+                font: {
+                    bold: {
+                        color: '#0077aa'
+
+                    }
+                }
+            },
+            layout: {
+                hierarchical: {
+                    direction: "DU",
+                    sortMethod: "directed",
+                    levelSeparation: 256,
+                    nodeSpacing: 720,
+                    treeSpacing: 1000,
+                }
+
+            },
+
+            physics: {
+                "barnesHut": {
+                    "centralGravity": 0,
+                    "avoidOverlap": 1
+                },
+                "minVelocity": 0.75
+            }
+        };
+
+        // initialize your network!
+        var network = new vis.Network(container, data, options);
+
+        network.on('click', function (properties) {
+            var ids = properties.nodes;
+            var clickedNodes = nodes.get(ids);
+            document.getElementById("nodetext").innerHTML = clickedNodes[0].display["Total Cost"];
+            console.log('clicked nodes:', clickedNodes);
+        });
+
+
+    </script>
 </body>
+
 </html>

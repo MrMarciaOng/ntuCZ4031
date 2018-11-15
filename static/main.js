@@ -15,30 +15,18 @@ var ws = new WebSocket("ws://localhost:8888/websocket");
 // }
 
 ws.onmessage = function(e) {
-	// console.log(e.data)
-	var result = formatResult(e.data);	
-    result = formatWhitespace(result);
-    var data = JSON.parse(e.data);
-    var graph = new Graph();
-    graph.headdealer(data);
-	document.getElementById("result").innerHTML = result;	
+	console.log(e)
+    createGraph(e.data);	
 }
 
 function handleSubmit(e) {
 	ws.send(JSON.stringify(e));
 }
 
-
-function formatResult(text) {
-	Object.keys(OPERATORS).forEach(key => {
-		text = text.replace(new RegExp(key, 'g'), OPERATORS[key]);
-	})
-
-	return text;
-}
-
-function formatWhitespace(text) {
-	return text.replace(new RegExp('\\n', 'g'), '<br>');
+function createGraph(data){
+    console.log(data);
+    var graph = new Graph();
+    graph.headdealer(data);
 }
 
 function Graph(){
@@ -50,8 +38,9 @@ this.counter = 0;
 
 this.headdealer = function(arrayc)
 {
-    // console.log(arrayc);
-    // console.log(arrayc["Plan"]);
+    console.log(arrayc);
+    console.log(arrayc["Plan"]);
+    arrayc = JSON.parse(arrayc);
     this.counter++;
     var nodesLabel = "";
     Object.keys(arrayc["Plan"]).forEach(function(key) {
