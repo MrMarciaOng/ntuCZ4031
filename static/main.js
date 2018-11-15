@@ -26,13 +26,28 @@ var biggestbody = 0;
 var biggestbodyid; 
 var biggestbodyparent;
 
+var longestactual = 0;
+var longestactualid;
+var longestactualparent;
+
 function finaledit(data)
 {
 
     console.log("BIGGEST BODY ID:" +biggestbodyid)
     console.log(data);
     data.nodes.update({id: biggestbodyid,  color: {border: 'RED'}});
-    data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost', font: {strokeWidth: 2, strokeColor : 'RED'}});
+
+    if(longestactualid == biggestbodyid)
+    {
+        data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost And Longest Actual Time', font: {strokeWidth: 2, strokeColor : 'RED'}});
+    }
+    else
+    {
+        data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost', font: {strokeWidth: 2, strokeColor : 'RED'}});
+     data.edges.update({from: longestactualid, to: longestactualparent, label: 'Longest Actual Time', font: {strokeWidth: 2, strokeColor : 'Yellow'}});
+    }
+    
+
 
 };
 
@@ -220,7 +235,6 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
     var nodesTotal = "";
 
     holdcount = this.counter;
-    console.log(this.counter + " OI COUNTER HERE LA")
     
     Object.keys(bodypart[i]).forEach(function(key) {
         if(key != "Plans"){
@@ -234,7 +248,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
                     biggestbody = temphold;
                     biggestbodyid = holdcount;
                     biggestbodyparent = parentcounter;
-                    console.log("CURRENT BIGGEST LAAAHH"+biggestbodyid);
+
                     nodesLabel = nodesLabel.concat("<b>"+tempString+"</b>" +'\n');
                     nodesTitle = nodesTitle.concat(tempString +'\n');
                 }
@@ -249,8 +263,24 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
             }
             else if(key == "Actual Total Time")
             {
-                nodesTitle = nodesTitle.concat(tempString +'\n');
-                nodesLabel = nodesLabel.concat(tempString +'\n');
+                temphold = parseInt(bodypart[i]["Total Cost"]);
+                console.log("Temphold :"+temphold);
+                if(longestactual <= temphold) 
+                {
+                    longestactual = temphold;
+                    longestactualid = holdcount;
+                    longestactualparent = parentcounter;
+
+                    nodesLabel = nodesLabel.concat("<b>"+tempString+"</b>" +'\n');
+                    nodesTitle = nodesTitle.concat(tempString +'\n');
+                }
+                else
+                {
+                    nodesLabel = nodesLabel.concat(tempString +'\n');
+                    nodesTitle = nodesTitle.concat(tempString +'\n');
+
+                }
+
                 //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
             }
             else if(key == "Relation Name")
@@ -330,12 +360,16 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
     };
     console.log(this.nodes);
     this.options = {
+
+        physics : false,
         edges: {
             font: {
                 size: 12
             }
         },
         nodes: {
+
+            chosen: false,
             shape: 'box',
             font: {
                 bold: {
@@ -349,8 +383,8 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
                 direction: "DU",
                 sortMethod: "directed",
                 levelSeparation: 256,
-                nodeSpacing: 720,
-                treeSpacing: 1000,
+                nodeSpacing: 420,
+                treeSpacing: 666,
             }
 
         }
