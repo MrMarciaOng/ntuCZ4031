@@ -39,13 +39,13 @@
 	<style type="text/css">
 		#graph {
 			width: 2400px;
-			height: 400px;
+			height: 800px;
 			border: 1px solid lightgray;
 		}
 
 		#legend {
-			width: 200px;
-			height: 400px;
+			width: 1600px;
+			height: 175px;
 			border: 1px solid lightgray;
 		}
 	</style>
@@ -85,9 +85,10 @@
 			<h3>
 				<div class="col-sm-8" id="gtitle"> Graph</div>
 			</h3>
-			<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;">
-				<div class="row">
-					<div id="legend"></div>
+			<div id="legend"style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 300px;min-length : 1080px"></div>
+			<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 1080px">
+				<div class="row" style="min-height:inherit; min-width:inherit">
+					
 					<div class="col-sm-8" id="graph"></div>
 					<div class="col-sm-4 table table-responsive" id="nodetext"></div>
 				</div>

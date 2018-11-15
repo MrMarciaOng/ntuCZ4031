@@ -97,10 +97,16 @@
 			document.getElementById("plan").value = sample;
 		}
 	</script>
-	<style type="text/css">
+		<style type="text/css">
 		#graph {
-			width: 600px;
-			height: 400px;
+			width: 2400px;
+			height: 800px;
+			border: 1px solid lightgray;
+		}
+
+		#legend {
+			width: 1600px;
+			height: 175px;
 			border: 1px solid lightgray;
 		}
 	</style>
@@ -135,16 +141,21 @@
 		</div>
 		<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
 		<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(2)">Visualize</button>
-		<h3>Graph</h3>
+		
 		<div id="highlight"></div>
-		<h3>
-			<div id="gtitle"> Graph</div>
-		</h3>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8" id="graph"></div>
-				<div class="col-sm-4 table table-responsive" id="nodetext"></div>
+		
+		<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;">
+				<h3>
+					<div class="col-sm-8" id="gtitle"> Graph</div>
+				</h3>
+				<div id="legend"style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 300px;min-length : 1080px"></div>
+				<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 1080px">
+					<div class="row" style="min-height:inherit; min-width:inherit">
+						
+						<div class="col-sm-8" id="graph"></div>
+						<div class="col-sm-4 table table-responsive" id="nodetext"></div>
+					</div>
+				</div>
+	
 			</div>
-
-		</div>
 	</div>

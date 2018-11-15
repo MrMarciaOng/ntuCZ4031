@@ -254,6 +254,86 @@ function Graph() {
 
             };
 
+            this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
+    {
+    
+        if(displayNode!=null){
+            var newObj = JSON.parse(JSON.stringify(displayNode));
+        //     if(newObj.Plans != null){
+        //     delete newObj.Plans;
+        //     }
+        }
+        if (nodetype == "Hash Join")
+        {
+            this.nodes.add({id: counter,color : "#e0dab3",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel,title: '<pre>' + nodesTitle + '</pre>', shape : "circle",display: newObj})
+        }
+        else if (nodetype == "Hash")
+        {
+            this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle", display: newObj})
+        }
+        else if (nodetype == "Nested Loop")
+        {
+            this.nodes.add({id: counter,color : "#ad6e4a",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "circle", display: newObj})
+        }
+        else if (nodetype == "Merge Join")
+        {
+            this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>',shape : "circle", display: newObj})
+        }
+    
+        else if (nodetype == "Seq Scan")
+        {
+            this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box", display: newObj})
+        }
+        else if (nodetype == "Index Scan")
+        {
+            this.nodes.add({id: counter,color : "#ad6e4a",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box",display: newObj})
+        }
+        else if (nodetype == "Values Scan")
+        {
+            this.nodes.add({id: counter,color : "#4aad69", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box", display: newObj})
+        }
+    
+        else if (nodetype == "Index Only Scan")
+        {
+            this.nodes.add({id: counter,color : "#c1bfae",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box", display: newObj})
+        }
+        else if (nodetype == "Subquery Scan")
+        {
+            this.nodes.add({id: counter,color : "#8aad4a", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box", display: newObj})
+        }
+        else if (nodetype == "Function Scan")
+        {
+            this.nodes.add({id: counter,color : "#a37d7d", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "box", display: newObj})
+        }
+    
+         else if (nodetype == "Sort")
+        {
+            this. nodes.add({id: counter,color : "#8aad4a", font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "diamond", display: newObj})
+        }
+        else if (nodetype == "Aggregate")
+        {
+            this.nodes.add({id: counter,color : "#a37d7d",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' },label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', shape : "diamond", display: newObj})
+        }
+        else
+        {
+            this.nodes.add({id: counter,color : "#4aad69",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', display: newObj})
+        }
+        /*
+        'Materialize'
+        'Limit'
+        'Result' 
+        'Gather'
+        'Gather Merge'
+        
+        'BitmapAnd'
+        'BitmapOr'
+        'Bitmap Heap Scan'
+        'Bitmap Index Scan'
+        'CTE Scan'
+        'Append'
+        'Unique'*/
+    };
+           
 
             this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
     {
@@ -429,11 +509,11 @@ function Graph() {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
                     //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
                 }
-                else if(key == "Output")
-                {
-                    nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
-                }
+                // else if(key == "Output")
+                // {
+                //     nodesTitle = nodesTitle.concat(tempString+'\n');
+                //     //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+                // }
                 else if(key == "Plan Rows")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
