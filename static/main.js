@@ -36,15 +36,17 @@ function finaledit(data)
     console.log("BIGGEST BODY ID:" +biggestbodyid)
     console.log(data);
     data.nodes.update({id: biggestbodyid,  color: {border: 'RED'}});
+    data.nodes.update({id: longestactualid,  color: {border: 'BLUE'}});
+
 
     if(longestactualid == biggestbodyid)
     {
-        data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost And Longest Actual Time', font: {strokeWidth: 2, strokeColor : 'RED'}});
+        data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost And Longest Actual Time', font: {color : 'RED'}});
     }
     else
     {
-        data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost', font: {strokeWidth: 2, strokeColor : 'RED'}});
-     data.edges.update({from: longestactualid, to: longestactualparent, label: 'Longest Actual Time', font: {strokeWidth: 2, strokeColor : 'Yellow'}});
+        data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost', font: {color : 'RED'}});
+        data.edges.update({from: longestactualid, to: longestactualparent, label: 'Longest Actual Time', font: {color : 'BLUE'}});
     }
     
 
@@ -263,7 +265,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
             }
             else if(key == "Actual Total Time")
             {
-                temphold = parseInt(bodypart[i]["Total Cost"]);
+                temphold = parseInt(bodypart[i]["Actual Total Time"]);
                 console.log("Temphold :"+temphold);
                 if(longestactual <= temphold) 
                 {
