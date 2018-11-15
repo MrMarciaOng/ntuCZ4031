@@ -20,6 +20,7 @@
 				const host = null;
 				const port =null;
 				const query = document.getElementById("query").value;
+				document.getElementById("highlight").innerHTML = query;
 				const payload = {type, data: {db_name, user, password, host, port, query}};
 				handleSubmit(payload);
 			}
@@ -72,17 +73,17 @@
 			</div>
 			<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
 			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1);zoomGraph()">Visualize</button>
+			<div id="highlight"></div>		
+			<div class="container">
 			<h3><div class="col-sm-8" id = "gtitle"> Graph</div></h3>			
 			<div class="container"style="padding-left: 0px;margin-left: 0px;">
-
 				<div class="row">
 					<div id="legend"></div>
-					<div id="graph"></div>
+					<div class="col-sm-8" id="graph"></div>
 					<div class="col-sm-4 table table-responsive" id="nodetext"></div>
 				</div>
-				
 			</div>
-			
+
 			</div>
 	</body>
 </html>
