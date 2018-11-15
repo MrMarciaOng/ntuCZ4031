@@ -139,6 +139,7 @@ this.headdealer = function(arrayc)
 
         }
     finaledit(this.data);
+    legendmaker(this.network,this.data);
 
    
    
@@ -150,6 +151,19 @@ function updateheadnodes(data)
   
     data.nodes.update({id: 1,  color: {border: 'GREEN'}});
 };
+
+function legendmaker(network,data)
+{
+     var hor =  100
+     var ver =  300
+      console.log(network.view.sourceTranslation.x);
+      var step = 7;
+      data.nodes.add({id: 9000, x: hor, y: ver, label: 'Internet', value: 1, fixed: true, physics:false});
+      data.nodes.add({id: 9001, x: hor, y: ver + step, label: 'Switch', value: 1, fixed: true,  physics:false});
+      data.nodes.add({id: 9002, x: hor, y: ver + 2 * step, label: 'Server', fixed: true,  physics:false});
+      data.nodes.add({id: 9003, x: hor, y: ver + 3 * step, label: 'Computer', value: 1, fixed: true,  physics:false});
+      data.nodes.add({id: 9004, x: hor, y: ver + 4 * step, label: 'Smartphone', value: 1, fixed: true,  physics:false});
+}
 this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
 {
 
@@ -249,7 +263,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
             var tempString = key + ": " + String(bodypart[i][key]);
             if(key == "Total Cost")
             {
-                temphold = parseInt(bodypart[i]["Total Cost"]);
+                temphold = parseFloat(bodypart[i]["Total Cost"]);
                 console.log("Temphold :"+temphold);
                 if(biggestbody <= temphold) 
                 {
@@ -257,7 +271,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
                     biggestbodyid = holdcount;
                     biggestbodyparent = parentcounter;
 
-                    nodesLabel = nodesLabel.concat("<b>"+tempString+"</b>" +'\n');
+                    nodesLabel = nodesLabel.concat(tempString +'\n');
                     nodesTitle = nodesTitle.concat(tempString +'\n');
                 }
                 else
@@ -271,7 +285,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
             }
             else if(key == "Actual Total Time")
             {
-                temphold = parseInt(bodypart[i]["Actual Total Time"]);
+                temphold = parseFloat(bodypart[i]["Actual Total Time"]);
                 console.log("Temphold :"+temphold);
                 if(longestactual <= temphold) 
                 {
@@ -279,7 +293,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
                     longestactualid = holdcount;
                     longestactualparent = parentcounter;
 
-                    nodesLabel = nodesLabel.concat("<b>"+tempString+"</b>" +'\n');
+                    nodesLabel = nodesLabel.concat(tempString +'\n');
                     nodesTitle = nodesTitle.concat(tempString +'\n');
                 }
                 else
@@ -300,7 +314,7 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
             else if(key == "Node Type")
             {
                 nodesTitle = nodesTitle.concat(tempString+'\n');
-                nodesLabel = nodesLabel.concat(tempString +'\n');
+                nodesLabel = nodesLabel.concat(tempString+'\n');
                 //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
             }
             else if(key == "Alias Name")
@@ -319,6 +333,11 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
                 //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
             }
             else if(key == "Actual Rows")
+            {
+                nodesTitle = nodesTitle.concat(tempString+'\n');
+                //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+            }
+            else if(key == "Output")
             {
                 nodesTitle = nodesTitle.concat(tempString+'\n');
                 //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
