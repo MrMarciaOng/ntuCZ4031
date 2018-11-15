@@ -17,7 +17,7 @@ def connect(data):
         return ""
 
 def query_handler(data):
-    query = "explain (analyze, format json) {}".format(data["query"])
+    query = "explain (analyze,buffers,verbose, format json) {}".format(data["query"])
     conn = connect(data)
     cursor = conn.cursor()
 
@@ -27,7 +27,7 @@ def query_handler(data):
        
     except Exception as err:
         print(err)
-        return "Error when executing query! Please check your syntax"
+        return "Query Error : Please check input"
 
     return plan[0][0][0]
 

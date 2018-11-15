@@ -81,7 +81,7 @@ this.headdealer = function(arrayc)
         }
     
     // create an array with edges
-
+        console.log(arrayc)
 
    
    
@@ -92,7 +92,7 @@ this.nodecreator = function(nodesLabel,counter,nodetype)
 {
     if (nodetype == "Hash Join")
     {
-        this.nodes.add({id: counter,color : "#e0dab3",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, shape : "circle"})
+        this.nodes.add({id: counter,color : "#e0dab3",font: { multi: 'html', bold:{ color : "red"},face: 'georgia' }, label: nodesLabel, shape : "circle"})
     }
     else if (nodetype == "Hash")
     {
@@ -141,8 +141,6 @@ this.nodecreator = function(nodesLabel,counter,nodetype)
     {
         this.nodes.add({id: counter,color : "#a37d7d",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, shape : "diamond"})
     }
-
-
     else
     {
         this.nodes.add({id: counter,color : "#4aad69",font: { multi: 'html', face: 'georgia' }, label: nodesLabel})
