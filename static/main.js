@@ -35,8 +35,9 @@ function finaledit(data)
 
     console.log("BIGGEST BODY ID:" +biggestbodyid)
     console.log(data);
-    data.nodes.update({id: biggestbodyid,  color: {border: 'RED'}});
     data.nodes.update({id: longestactualid,  color: {border: 'BLUE'}});
+    data.nodes.update({id: biggestbodyid,  color: {border: 'RED'}});
+    
 
 
     if(longestactualid == biggestbodyid)
@@ -131,7 +132,7 @@ this.headdealer = function(arrayc)
     });
     console.log(debugcon);
     this.nodecreator(nodesLabel,nodesTitle, arrayc["Plan"],this.counter,arrayc["Plan"]["Node Type"]);
-
+    updateheadnodes(this.data);
     if(arrayc["Plan"].Plans !== undefined)
         {
             this.bodydealer(arrayc["Plan"]["Plans"],this.counter) // pass to recursive function
@@ -143,7 +144,12 @@ this.headdealer = function(arrayc)
    
 };
 
+function updateheadnodes(data)
+{
 
+  
+    data.nodes.update({id: 1,  color: {border: 'GREEN'}});
+};
 this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
 {
 
