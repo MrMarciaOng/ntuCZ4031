@@ -535,23 +535,28 @@ function Graph() {
     // initialize your network!
     this.network = new vis.Network(this.container, this.data, this.options);
     console.log("BEFORE BLOCKING ")
-    this.network.once("beforeDrawing", function (params) {
-        var maxWidth = 496;
+    this.network.on("beforeDrawing", function (params) {
+        var maxWidth = 49600;
         var minWidth = 20;
-        var widthFactor = params.iterations / params.total;
+        console.log(params);
+        console.log(params.canvas.attributeStyleMap.size);
+        
+        var widthFactor = 49/ params.canvas.attributeStyleMap.size ;
         var width = Math.max(minWidth, maxWidth * widthFactor);
-        console.log("STARTTTTTTT OF initRedraw")
-        document.getElementById('loadingBar').style.display = 'block';
+        $("#loadingBar").css("display", "");
+        // document.getElementById('loadingBar').style.display = "";
         document.getElementById('bar').style.width = width + 'px';
         document.getElementById('text').innerHTML = Math.round(widthFactor * 100) + '%';
     });
-    this.network.once("afterDrawing", function () {
+    this.network.on("afterDrawing", function (params) {
+        alert("testttt")
         console.log("STARTTTTTTT OF afterdrawing")
+
         document.getElementById('text').innerHTML = '100%';
         document.getElementById('bar').style.width = '496px';
-        document.getElementById('loadingBar').style.display = 'none';
+        // document.getElementById('loadingBar').style.display = "none";
         // really clean the dom element
-        setTimeout(function () { document.getElementById('loadingBar').style.display = 'none'; }, 500);
+        setTimeout(function () { document.getElementById('loadingBar').style.display = 'none'; }, 50000);
     });
 
     this.network.on('click', function (properties) {
