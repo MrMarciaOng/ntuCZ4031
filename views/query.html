@@ -80,7 +80,6 @@
 		</div>
 		<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
 		<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1);zoomGraph()">Visualize</button>
-		<div id="highlight"></div>
 		<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;">
 			<h3>
 				<div class="col-sm-8" id="gtitle"> Graph</div>
@@ -88,10 +87,12 @@
 			<div id="legend"style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 300px;min-length : 1080px"></div>
 			<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 1080px">
 				<div class="row" style="min-height:inherit; min-width:inherit">
-					
-					<div class="col-sm-8" id="graph"></div>
+					<div class="col-sm-8" id="graph">
+					</div>
 					<div class="col-sm-4 table table-responsive" id="nodetext" style ="padding-left : 0px"></div>
 				</div>
+				<div id="highlight"></div>
+
 			</div>
 
 		</div>
