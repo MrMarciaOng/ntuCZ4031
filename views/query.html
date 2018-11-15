@@ -15,11 +15,11 @@
 		
 		<script>
 			function formatData(type) {
-				const db_name ="postgres";
-				const user = "postgres";
-				const password = "Sns27sep.";
-				const host = "localhost";
-				const port ="5432";
+				const db_name =null;
+				const user = null;
+				const password = null;
+				const host = null;
+				const port =null;
 				const query = document.getElementById("query").value;
 				const payload = {type, data: {db_name, user, password, host, port, query}};
 				handleSubmit(payload);

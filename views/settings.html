@@ -17,7 +17,7 @@
 			function formatData(type) {
 				const db_name = document.getElementById("db_name").value || "CZ4031";
 				const user = document.getElementById("user").value || "postgres";
-				const password = document.getElementById("password").value || "admin";
+				const password = document.getElementById("password").value || "postgres";
 				const host = document.getElementById("host").value || "localhost";
 				const port = document.getElementById("port").value || "5432";
 				const payload = {type, data: {db_name, user, password, host, port}};
