@@ -39,7 +39,7 @@
 	<style type="text/css">
 		#graph {
 			width: 2400px;
-			height: 1460px;
+			height: 960px;
 			border: 1px solid lightgray;
 		}
 
@@ -76,16 +76,20 @@
 		<hr class="my-4" style="margin-top: 5px !important; margin-bottom: 5px !important;">
 		<h3>Query</h3>
 		<div>
-			<textarea placeholder="Input your query here" id="query" rows="20" cols="75"></textarea>
+			<textarea placeholder="Input your query here" id="query" rows="10" cols="75"></textarea>
 		</div>
 		<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
 		<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1);zoomGraph()">Visualize</button>
 		<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;">
 			<h3>
-				<div class="col-sm-8" id="gtitle"> Graph</div>
+				<div class="col-sm-8" id="gtitle"> Legends</div>
 			</h3>
 			<div id="legend"style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 300px;min-length : 1080px"></div>
 			<div class="container" style="padding-left: 0px;margin-left: 0px;max-width: none;max-height: none;min-height: 1080px">
+					
+					<h3>
+				<div class="col-sm-8" id="title"> Graph</div>
+			</h3>
 				<div class="row" style="min-height:inherit; min-width:inherit">
 					<div class="col-sm-8" id="graph">
 					</div>
