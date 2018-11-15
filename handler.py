@@ -1,13 +1,13 @@
 import json
 from query_handler import connect, query_handler
-# from index import explain
 
 """
     Message type:
     0: Check Connection
-    1: Explain Query Execution Plan; Input: Query
+    1: Visualize Query Execution Plan; Input: Query
     2: Input: Plan
 """
+
 
 defaultDBData = {
     "db_name" : "CZ4031",
