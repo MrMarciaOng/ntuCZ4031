@@ -365,19 +365,15 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
         console.log(this.body.nodes[ids]);
         var clickedNodes = this.body.nodes[ids];
         var nodeTextObject = clickedNodes["shape"]["labelModule"]["elementOptions"].display;
-        // document.getElementById("nodetext").innerHTML = clickedNodes["shape"]["labelModule"]["elementOptions"].display;
-        console.log('clicked nodes:', clickedNodes);
-        console.log(nodeTextObject);
-        console.log(nodeTextObject["Total Cost"]);
-        console.log(Object.keys(nodeTextObject));
-        console.log(nodeTextObject["Node Type"]);
-
 
         // get the reference for the body
         var div_nodetext = document.getElementById('nodetext');
 
         // creates a <table> element
         var tbl = document.createElement("table");
+        tbl.classList.add('table');
+        tbl.classList.add('table-striped');
+        var tbody = document.createElement("tbody");
 
         // creating rows
         Object.keys(nodeTextObject).forEach(function (key) {
@@ -389,18 +385,14 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
             let nodeValueText = document.createTextNode(nodeTextObject[key]);
             
             nodeValue.appendChild(nodeValueText);
-            //  for (var c = 0; c < 2; c++) {
-            //     var cell = document.createElement("td");
-            //     getRandom = Math.floor(Math.random() * (max - min + 1)) + min;
-            //     var cellText = document.createTextNode(nodeTextObjec);
-            //     cell.appendChild(cellText);
-            //     row.appendChild(cell);
-            // }
+        
             row.appendChild(nodeKey);
             row.appendChild(nodeValue);           
+            tbody.appendChild(row);
 
-            tbl.appendChild(row); // add the row to the end of the table body
         });//close
+        
+        tbl.appendChild(tbody); // add the row to the end of the table body
 
         if(div_nodetext.firstChild != null){
             div_nodetext.replaceChild(tbl, div_nodetext.firstChild);

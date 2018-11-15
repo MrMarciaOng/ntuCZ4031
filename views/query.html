@@ -65,10 +65,17 @@
 				<textarea placeholder="Input your query here" id="query" rows="20" cols="75"></textarea>
 			</div>
 			<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
-			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1);zoomGraph()">Visualize</button>
-			<h3><div id = "gtitle"> Graph</div></h3>
-			<div id="graph"></div>
-			<div id="nodetext"></div>
+			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1)">Visualize</button>
+			<h3><div id = "gtitle"> Graph</div></h3>			
+			<div class="container">
+
+				<div class="row">
+					<div class="col-sm-8" id="graph"></div>
+					<div class="col-sm-4 table table-responsive" id="nodetext"></div>
+				</div>
+				
+			</div>
+			
 			</div>
 	</body>
 </html>
