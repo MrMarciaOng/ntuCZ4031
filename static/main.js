@@ -15,6 +15,8 @@ function createGraph(data) {
     graph.headdealer(data);
 }
 
+function Graph(){
+
     this.nodes = new vis.DataSet([]);
 
 
@@ -236,3 +238,4 @@ function createGraph(data) {
 
 
     })
+}
