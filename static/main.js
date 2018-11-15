@@ -9,14 +9,100 @@ function handleSubmit(e) {
     ws.send(JSON.stringify(e));
 }
 
+
+
 function createGraph(data) {
     console.log(data);
     var graph = new Graph();
     graph.headdealer(data);
+    var legendgraph = new legendstatic();
+
+    //legendgraph
 }
 
-function Graph() {
+function legendstatic()
+{
     this.nodes = new vis.DataSet([]);
+    this.edges = new vis.DataSet([]);
+
+    var hor =  100
+    var ver =  300
+    var step = 92;
+
+   
+
+    this.nodes.add({id: 9000, x: hor, y: ver ,color : "#e0dab3",label : "Hash Join",  shape : "circle", fixed: true, physics:false});
+    this.nodes.add({id: 9001, x: hor, y: ver + step ,color : "#c1bfae",label : "Hash",  shape : "circle", fixed: true, physics:false});
+    this.nodes.add({id: 9002, x: hor, y: ver + step*2 ,color : "#ad6e4a",label : "Nested Loop",  shape : "circle", fixed: true, physics:false});
+    this.nodes.add({id: 9003, x: hor, y: ver + step*3 ,color : "#4aad69",label : "Merge Join",  shape : "circle", fixed: true, physics:false});
+
+    this.nodes.add({id: 9004, x: hor+ step*1.5, y: ver ,color : "#c1bfae",label : "Seq Scan",  shape : "box", fixed: true, physics:false});
+    this.nodes.add({id: 9005, x: hor+ step*1.5, y: ver + step ,color : "#ad6e4a",label : "Index Scan",  shape : "box", fixed: true, physics:false});
+    this.nodes.add({id: 9006, x: hor+ step*1.5, y: ver + step*2 ,color : "#4aad69",label : "Values Scan",  shape : "box", fixed: true, physics:false}); 
+    this.nodes.add({id: 9007, x: hor+ step*1.5, y: ver + step*3 ,color : "#e2e1d9",label : "Index Only Scan",  shape : "box", fixed: true, physics:false}); 
+    this.nodes.add({id: 9008, x: hor+ step*1.5, y: ver + step*4 ,color : "#8aad4a",label : "Subquery Scan",  shape : "box", fixed: true, physics:false}); 
+    this.nodes.add({id: 9009, x: hor+ step*1.5, y: ver + step*5 ,color : "#a37d7d",label : "Function Scan",  shape : "box", fixed: true, physics:false}); 
+
+
+    this.nodes.add({id: 9010, x: hor+ step*3, y: ver  ,color : "#8aad4a",label : "Sort",  shape : "diamond", fixed: true, physics:false}); 
+    this.nodes.add({id: 9011, x: hor+ step*3, y: ver + step ,color : "#a37d7d",label : "Aggregate",  shape : "diamond", fixed: true, physics:false}); 
+
+    this.nodes.add({id: 9012, x: hor+ step*3, y: ver + step*2 ,label : "Other types", fixed: true, physics:false});  
+    
+    
+
+
+             // create a network
+    this.container = document.getElementById('legend');
+    //provide the data in the vis format
+    this.data = {
+        nodes: this.nodes,
+        edges: this.edges
+    };
+    console.log(this.nodes);
+    this.options = {
+
+        physics : false,
+        edges: {
+            font: {
+                size: 12
+            }
+        },
+        nodes: {
+
+            chosen: false,
+            shape: 'box',
+            font: {
+                bold: {
+                    color: '#0077aa'
+
+                }
+            }
+        },
+        
+       
+    };
+
+    // initialize your network!
+    this.network = new vis.Network(this.container, this.data, this.options);
+
+    this.network.on('click', function (properties) {
+        // var ids = properties.nodes;
+        // console.log(ids);
+        // console.log(this.body.nodes[ids]);
+        // var clickedNodes = this.body.nodes[ids];
+       
+
+        // // creates a <table> element
+    
+
+        // // creating rows
+    })
+        
+    
+};
+function Graph() {
+this.nodes = new vis.DataSet([]);
 this.edges = new vis.DataSet([]);
 
 this.counter = 0;
@@ -139,7 +225,6 @@ this.headdealer = function(arrayc)
 
         }
     finaledit(this.data);
-    legendmaker(this.network,this.data);
 
    
    
@@ -152,18 +237,7 @@ function updateheadnodes(data)
     data.nodes.update({id: 1,  color: {border: 'GREEN'}});
 };
 
-function legendmaker(network,data)
-{
-     var hor =  100
-     var ver =  300
-      console.log(network.view.sourceTranslation.x);
-      var step = 7;
-      data.nodes.add({id: 9000, x: hor, y: ver, label: 'Internet', value: 1, fixed: true, physics:false});
-      data.nodes.add({id: 9001, x: hor, y: ver + step, label: 'Switch', value: 1, fixed: true,  physics:false});
-      data.nodes.add({id: 9002, x: hor, y: ver + 2 * step, label: 'Server', fixed: true,  physics:false});
-      data.nodes.add({id: 9003, x: hor, y: ver + 3 * step, label: 'Computer', value: 1, fixed: true,  physics:false});
-      data.nodes.add({id: 9004, x: hor, y: ver + 4 * step, label: 'Smartphone', value: 1, fixed: true,  physics:false});
-}
+
 this.nodecreator = function(nodesLabel,nodesTitle,displayNode,counter,nodetype)
 {
 
@@ -379,7 +453,6 @@ this.bodydealer = function(bodypart,parentcounter) // deal with everything that 
 
     // create a network
     this.container = document.getElementById('graph');
-
     //provide the data in the vis format
     this.data = {
         nodes: this.nodes,
