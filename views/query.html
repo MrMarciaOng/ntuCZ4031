@@ -1,25 +1,31 @@
 <html>
 	<head>
-
+		<title>Query Visualizer</title>
 
 		<script src="../static/jquery.min.js"></script>
-
-		<title>Query Visualizer Page</title>
-
+		<script src="../static/bootstrap.js"></script>
 		<script src="../static/main.js"></script>
 		<script type="text/javascript" src="../static/vis.js"></script>
+
 	    <link href="../static/vis-network.css" rel="stylesheet" type="text/css" />
 		<link href="https://fonts.googleapis.com/css?family=Open+sans|Roboto+Slab" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../static/style.css">
-		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 		
 		<script>
 			function formatData(type) {
+<<<<<<< HEAD
 				const db_name ="CZ4031";
 				const user = "postgres";
 				const password = "Jeffrey98";
 				const host = "localhost";
 				const port ="5432";
+=======
+				const db_name =null;
+				const user = null;
+				const password = null;
+				const host = null;
+				const port =null;
+>>>>>>> 13910a132e168b4be1aaec35175adbfd968c7924
 				const query = document.getElementById("query").value;
 				const payload = {type, data: {db_name, user, password, host, port, query}};
 				handleSubmit(payload);
@@ -41,37 +47,31 @@
 		<div>
 			<h1>CZ4031 - Project 2</h1></a>
 			<p>
-					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-							  <span class="navbar-toggler-icon"></span>
-							</button>
-							<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-							  <div class="navbar-nav">
-								<a class="nav-item nav-link" href="/">Home </a>
-								<a class="nav-item nav-link active" href="/query">Query<span class="sr-only">(current)</span></a>
-								<a class="nav-item nav-link" href="/plan">Plan</a>
-								<a class="nav-item nav-link" href="/settings">Settings</a>
-							  </div>
-							</div>
-						  </nav>
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+						<div class="navbar-nav">
+						<a class="nav-item nav-link" href="/">Home </a>
+						<a class="nav-item nav-link active" href="/query">Query<span class="sr-only">(current)</span></a>
+						<a class="nav-item nav-link" href="/plan">Plan</a>
+						<a class="nav-item nav-link" href="/settings">Settings</a>
+						</div>
+					</div>
+				</nav>
 			</p>
 			<h2>Query Visualizer</h2>
 			<h3>Query</h3>
 			<div>
-				<textarea placeholder="Paste your query here" id="query" rows="20" cols="75"></textarea>
+				<textarea placeholder="Input your query here" id="query" rows="20" cols="75"></textarea>
 			</div>
-			<button type="button" class="btn btn-dark mainInput" onclick="giveSample()">Sample</button>
-			<button type="button" class="btn btn-dark mainInput" onclick="formatData(1)">Visualize</button>
+			<button type="button" class="btn btn-outline-dark mainInput" onclick="giveSample()">Sample</button>
+			<button type="button" class="btn btn-outline-dark mainInput" onclick="formatData(1)">Visualize</button>
 			<h3>Graph</h3>
-			<div id="result"></div>
-			<!-- <a href="/">Back to Home Page</a> -->
 			<div id="graph"></div>
 			<div id="nodetext"></div>
 			</div>
-			
-		
-		<!-- <button class="command" onclick="speak()">Speak</button> -->
-
 	</body>
 </html>
 
