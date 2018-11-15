@@ -19,7 +19,35 @@
 <body>
     <div id="mynetwork"></div>
     <div id="nodetext"></div>
-
+    <ul class="list-unstyled">
+        <li class="media">
+            <img class="mr-3" src="./static/dog.jpg" alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">List-based media object</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+        </li>
+        <li class="media my-4">
+            <img class="mr-3" src=".../64x64" alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">List-based media object</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+        </li>
+        <li class="media">
+            <img class="mr-3" src=".../64x64" alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">List-based media object</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+        </li>
+    </ul>
     <script type="text/javascript">
         // create an array with nodes
 
@@ -103,9 +131,9 @@
                 }
 
             });
-           // console.log(nodesLabel);
+            // console.log(nodesLabel);
 
-            nodecreator(nodesLabel, counter, arrayc["Plan"]["Node Type"],arrayc["Plan"]);
+            nodecreator(nodesLabel, counter, arrayc["Plan"]["Node Type"], arrayc["Plan"]);
             //nodes.add({id: counter,color : {border : 'red'}, label: nodesLabel})
             // nodes.add({id: counter,color : {border : 'red'}, label:String("Join Type: "+arrayc["Plan"]['Join Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Node Type']+'\n'+ "Node Type: "+arrayc["Plan"]['Total Cost']+'\n'+ "Plan Rows: "+arrayc["Plan"]['Plan Rows'])})
             if (arrayc["Plan"].Plans !== undefined) {
@@ -118,17 +146,17 @@
 
         function nodecreator(nodesLabel, counter, nodetype, displayNode) {
             displayNode = displayNode || null;
-            if(displayNode!=null){
+            if (displayNode != null) {
                 var newObj = JSON.parse(JSON.stringify(displayNode));
                 console.log("wtf")
-                if(newObj.Plans != null){
-                delete newObj.Plans;
-            }
+                if (newObj.Plans != null) {
+                    delete newObj.Plans;
+                }
             }
 
 
             if (nodetype == "Hash Join") {
-                nodes.add({ id: counter, color: "#e0dab3", label: nodesLabel, shape: "circle" , title: '<pre>' + nodesLabel + '</pre>', display : newObj })
+                nodes.add({ id: counter, color: "#e0dab3", label: nodesLabel, shape: "circle", title: '<pre>' + nodesLabel + '</pre>', display: newObj })
             }
             else if (nodetype == "Hash") {
                 nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "circle" })
@@ -141,8 +169,8 @@
             }
 
             else if (nodetype == "Seq Scan") {
-               // console.log(nodesLabel);
-                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "box", title: '<pre>' + nodesLabel + '</pre>', display : newObj })
+                // console.log(nodesLabel);
+                nodes.add({ id: counter, color: "#c1bfae", label: nodesLabel, shape: "box", title: '<pre>' + nodesLabel + '</pre>', display: newObj })
             }
             else if (nodetype == "Index Scan") {
                 nodes.add({ id: counter, color: "#ad6e4a", label: nodesLabel, shape: "box" })
