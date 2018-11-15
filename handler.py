@@ -8,6 +8,7 @@ from query_handler import connect, query_handler
     2: Input: Plan
 """
 
+
 defaultDBData = {
     "db_name" : "CZ4031",
     "user" : "postgres",
