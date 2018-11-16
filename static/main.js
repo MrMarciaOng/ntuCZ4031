@@ -2,7 +2,6 @@ var ws = new WebSocket("ws://localhost:8888/websocket");
 var hword = null;
 
 ws.onmessage = function (e) {
-    console.log(e)
     createGraph(e.data);
     hword = document.getElementById("highlight").innerHTML;
 }
@@ -27,12 +26,9 @@ function unhighlight(){
 }
 
 function createGraph(data) {
-    console.log(data);
     var graph = new Graph();
     graph.headdealer(data);
     var legendgraph = new legendstatic();
-
-    //legendgraph
 }
 
 function legendstatic() {
@@ -42,8 +38,6 @@ function legendstatic() {
     var hor = 100
     var ver = 300
     var step = 92;
-
-
 
     this.nodes.add({ id: 9000, x: hor, y : ver, color: "#e0dab3", label: "Hash Join", shape: "circle", fixed: true, physics: false });
     this.nodes.add({ id: 9001, x: hor + step,y : ver,  color: "#c1bfae", label: "Hash", shape: "circle", fixed: true, physics: false });
@@ -63,9 +57,6 @@ function legendstatic() {
 
     this.nodes.add({ id: 9012, x: hor + step * 15.2,y : ver,   label: "Other types", fixed: true, physics: false });
 
-
-
-
     // create a network
     this.container = document.getElementById('legend');
     //provide the data in the vis format
@@ -73,7 +64,6 @@ function legendstatic() {
         nodes: this.nodes,
         edges: this.edges
     };
-    console.log(this.nodes);
     this.options = {
 
         physics: false,
@@ -93,27 +83,10 @@ function legendstatic() {
                 }
             }
         },
-
-
     };
 
     // initialize your network!
     this.network = new vis.Network(this.container, this.data, this.options);
-
-    this.network.on('click', function (properties) {
-        // var ids = properties.nodes;
-        // console.log(ids);
-        // console.log(this.body.nodes[ids]);
-        // var clickedNodes = this.body.nodes[ids];
-
-
-        // // creates a <table> element
-
-
-        // // creating rows
-    })
-
-
 };
 function Graph() {
     this.nodes = new vis.DataSet([]);
@@ -133,9 +106,6 @@ function Graph() {
 
     function finaledit(data)
     {
-    
-        console.log("BIGGEST BODY ID:" +biggestbodyid)
-        console.log(data);
         data.nodes.update({id: longestactualid,  color: {border: 'BLUE'}});
         data.nodes.update({id: biggestbodyid,  color: {border: 'RED'}});
         
@@ -149,32 +119,20 @@ function Graph() {
             data.edges.update({from: biggestbodyid, to: biggestbodyparent, label: 'Biggest Cost', font: {color : 'RED'}});
             data.edges.update({from: longestactualid, to: longestactualparent, label: 'Longest Actual Time', font: {color : 'BLUE'}});
         }
-        
-    
-    
     };
 
         function updateheadnodes(data) {
-
-
             data.nodes.update({ id: 1, color: { border: 'GREEN' } });
         };
 
+    this.headdealer = function (arrayc) {
 
-       
-
-
-
-            this.headdealer = function (arrayc) {
-
-                arrayc = JSON.parse(arrayc);
+        arrayc = JSON.parse(arrayc);
         this.counter++;
         var nodesLabel = "";
         var nodesTitle = "";
         var debugcon = "";
         var displayNode = "";
-        console.log(arrayc);
-        console.log(arrayc["Plan"]);
         Object.keys(arrayc["Plan"]).forEach(function(key) {
             if(key != "Plans"){
                 var tempString = key + ": " + String(arrayc["Plan"][key]);
@@ -182,66 +140,65 @@ function Graph() {
                 {
                     nodesTitle = nodesTitle.concat(tempString +'\n');
                     nodesLabel = nodesLabel.concat(tempString +'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
     
                 }
                 else if(key == "Actual Total Time")
                 {
                     nodesTitle = nodesTitle.concat(tempString +'\n');
                     nodesLabel = nodesLabel.concat(tempString +'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Relation Name")
                 {
                     nodesTitle = nodesTitle.concat(tempString +'\n');
                     nodesLabel = nodesLabel.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Node Type")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
                     nodesLabel = nodesLabel.concat(tempString +'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Alias Name")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Join Type")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Plan Rows")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Actual Rows")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Plan Rows")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Hash Cond")
                 {
                     nodesTitle = nodesTitle.concat(tempString +'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else
                 {
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
     
             }
     
         });
-        console.log(debugcon);
         this.nodecreator(nodesLabel,nodesTitle, arrayc["Plan"],this.counter,arrayc["Plan"]["Node Type"]);
         updateheadnodes(this.data);
         if(arrayc["Plan"].Plans !== undefined)
@@ -259,9 +216,6 @@ function Graph() {
     
         if(displayNode!=null){
             var newObj = JSON.parse(JSON.stringify(displayNode));
-        //     if(newObj.Plans != null){
-        //     delete newObj.Plans;
-        //     }
             if(newObj.Workers != null){
                 delete newObj.Workers;
             }
@@ -321,27 +275,10 @@ function Graph() {
         {
             this.nodes.add({id: counter,color : "#4aad69",font: { multi: 'html', face: 'georgia' }, label: nodesLabel, title: '<pre>' + nodesTitle + '</pre>', display: newObj})
         }
-        /*
-        'Materialize'
-        'Limit'
-        'Result' 
-        'Gather'
-        'Gather Merge'
-        
-        'BitmapAnd'
-        'BitmapOr'
-        'Bitmap Heap Scan'
-        'Bitmap Index Scan'
-        'CTE Scan'
-        'Append'
-        'Unique'*/
     };
-           
 
     this.bodydealer = function(bodypart,parentcounter) // deal with everything that has plans recursively
-    {
-        console.log(bodypart.length);
-    
+    {    
         for(let i=0 ; i< bodypart.length;i++)
         {
     
@@ -358,7 +295,6 @@ function Graph() {
                 if(key == "Total Cost")
                 {
                     temphold = parseFloat(bodypart[i]["Total Cost"]);
-                    console.log("Temphold :"+temphold);
                     if(biggestbody <= temphold) 
                     {
                         biggestbody = temphold;
@@ -374,13 +310,12 @@ function Graph() {
                         nodesTitle = nodesTitle.concat(tempString +'\n');
     
                     }
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
     
                 }
                 else if(key == "Actual Total Time")
                 {
                     temphold = parseFloat(bodypart[i]["Actual Total Time"]);
-                    console.log("Temphold :"+temphold);
                     if(longestactual <= temphold) 
                     {
                         longestactual = temphold;
@@ -396,79 +331,63 @@ function Graph() {
                         nodesTitle = nodesTitle.concat(tempString +'\n');
     
                     }
-    
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
                 }
                 else if(key == "Relation Name")
                 {
                     nodesTitle = nodesTitle.concat(tempString +'\n');
                     nodesLabel = nodesLabel.concat(tempString +'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Node Type")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
                     nodesLabel = nodesLabel.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Alias Name")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Join Type")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Plan Rows")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Actual Rows")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
-                // else if(key == "Output")
-                // {
-                //     nodesTitle = nodesTitle.concat(tempString+'\n');
-                //     //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
-                // }
                 else if(key == "Plan Rows")
                 {
                     nodesTitle = nodesTitle.concat(tempString+'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else if(key == "Hash Cond")
                 {
                     nodesTitle = nodesTitle.concat(tempString +'\n');
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
                 else
                 {
-                    //displayNode = displayNode.concat("<b>"+tempString+"</b>" +'\n');
+ 
                 }
-    
             }
-    
-        });
-        //nodes.add({id: counter, label: nodesLabel});
-    
+        });    
         
         this.nodecreator(nodesLabel,nodesTitle,bodypart[i],this.counter,bodypart[i]["Node Type"],);
-        // nodes.add({id: counter, label: String("Node Type: "+bodypart[i]["Node Type"]+'\n'+ "Plan Rows: "+bodypart[i]['Total Cost']+'\n'+ "Plan Rows: "+bodypart[i]['Plan Rows'])});
         this.edges.add({from: this.counter, to: parentcounter ,arrows : "to"})
             if(bodypart[i].Plans != undefined)
             {
                 this.bodydealer(bodypart[i].Plans,this.counter)
             }
-    
-    
         }
-    
-        
     };
 
             // create a network
@@ -479,7 +398,6 @@ function Graph() {
                 nodes: this.nodes,
                 edges: this.edges
             };
-            console.log(this.nodes);
             this.options = {
 
                 physics: false,
@@ -517,11 +435,8 @@ function Graph() {
 
             this.network.on('click', function (properties) {
                 var ids = properties.nodes;
-                // console.log(ids);
-                // console.log(this.body.nodes[ids]);
                 var clickedNodes = this.body.nodes[ids];
                 var nodeTextObject = clickedNodes["shape"]["labelModule"]["elementOptions"].display;
-                console.log(nodeTextObject);
 
                 // get the reference for the body
                 var div_nodetext = document.getElementById('nodetext');
