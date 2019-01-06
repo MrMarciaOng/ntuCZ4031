@@ -1,5 +1,8 @@
 # CZ4031 - Project 2
 
+## About
+The QEP Visualiser Tool is a web app built using Tornado and vis.js . This project aims to better visualize QEP than the current QEP visualisation tools offered. This will allow database devs understand how to go about fine tuning the database/query to improve performance.
+
 ## Group 21 - Members:
 - Jeffrey
 - Marcia Ong Wen Jie
